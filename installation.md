@@ -35,10 +35,10 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
 	12. renderer.phps
 	13. fpdf-fpdi folder
 	
-- Files added as a part of the last year's project that we modified are
+- Files from 4 to 12 are added/modified from the git repo https://github.com/TausifIqbal/moodle_quiz_annotator
 	
 
-- Files added/modified last year
+- Files from 4 to 8 are modified while 9 to 12 are untouched.
 	
 	
 - An additional folder for fpdf-fpdi is also to be added inside the moodle quiz module

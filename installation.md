@@ -21,5 +21,26 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
     * (optional) now to check imagemagick is working , convert a png file to a pdf ,in terminal run 
         * `convert file.png file.pdf`
 
+### Installation
+- The files added as a part of this project are
+	* parser.php
+	* test.php
+	* alphapdf.php
+	
+- Files added as a part of the last year's project that we modified are
+	* myindex.html
+	* mypdfannotate.js
+	* annotator.php
+	* upload.php
+
+- Files added/modified last year
+	* mypdfannotate.css
+	* myscript.js
+	* mystyles.css
+	* comment.php
+	* rendered.php
+	
+- All files except renderer.php is inside mod/quiz. Copy these files in this location. Copy renderer.php inside /question/type/essay/ 	
+	
 
 

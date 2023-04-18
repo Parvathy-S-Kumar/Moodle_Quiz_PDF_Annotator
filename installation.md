@@ -21,19 +21,19 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
 
 ### Installation
 - The files added as a part of this project are
-	* parser.php
-	* test.php
-	* alphapdf.php
-	* myindex.html
-	* mypdfannotate.js
-	* annotator.php
-	* upload.php
-	* mypdfannotate.css
-	* myscript.js
-	* mystyles.css
-	* comment.php
-	* renderer.phps
-	* fpdf-fpdi folder
+	1. parser.php
+	2. test.php
+	3. alphapdf.php
+	4. myindex.html
+	5. mypdfannotate.js
+	6. annotator.php
+	7. upload.php
+	8. mypdfannotate.css
+	9. myscript.js
+	10. mystyles.css
+	11. comment.php
+	12. renderer.phps
+	13. fpdf-fpdi folder
 	
 - Files added as a part of the last year's project that we modified are
 	

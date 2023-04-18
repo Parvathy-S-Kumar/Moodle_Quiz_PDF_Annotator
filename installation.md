@@ -2,8 +2,6 @@
 
 ### Requirements
 
-- PHP version 3.8 or above  
-Follow this [link](https://ubuntu.com/server/docs/programming-php) to install PHP in ubuntu
 - GhostScript  
 Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configuration/install-ghostscript/) to install ghostscript in ubuntu if it is not already installed
 - Imagemagick  
@@ -26,19 +24,22 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
 	* parser.php
 	* test.php
 	* alphapdf.php
-	
-- Files added as a part of the last year's project that we modified are
 	* myindex.html
 	* mypdfannotate.js
 	* annotator.php
 	* upload.php
-
-- Files added/modified last year
 	* mypdfannotate.css
 	* myscript.js
 	* mystyles.css
 	* comment.php
-	* renderer.php
+	* renderer.phps
+	* fpdf-fpdi folder
+	
+- Files added as a part of the last year's project that we modified are
+	
+
+- Files added/modified last year
+	
 	
 - An additional folder for fpdf-fpdi is also to be added inside the moodle quiz module
 	

@@ -40,6 +40,8 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
 	* comment.php
 	* rendered.php
 	
+- An additional folder for fpdf-fpdi is also to be added inside the moodle quiz module
+	
 - All files except renderer.php is inside mod/quiz. Copy these files in this location. Copy renderer.php inside /question/type/essay/ 	
 	
 

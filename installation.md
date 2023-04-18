@@ -38,7 +38,7 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
 	* myscript.js
 	* mystyles.css
 	* comment.php
-	* rendered.php
+	* renderer.php
 	
 - An additional folder for fpdf-fpdi is also to be added inside the moodle quiz module
 	

@@ -25,7 +25,7 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
     ```bash
       .
       ├── /var/www/html/moodle/
-      └── /var/www/html/moodle_quiz_annotator
+      └── /var/www/html/Moodle_Quiz_PDF_Annotator
     ```
 
 <details><summary> :warning: warning </summary>

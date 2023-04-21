@@ -4,16 +4,13 @@
  * into a page, that also uses such graphic state (handling of $groupXObject parameter of the importPage()).
  */
 
-use setasign\Fpdi;
+use setasign\Fpdi\Fpdi;
 
-require_once '../vendor/autoload.php';
+require_once 'autoload.php';
 
-$start = microtime(true);
-
-//class AlphaPDF extends Fpdi\Tfpdf\Fpdi
-class AlphaPDF extends Fpdi\Fpdi
+class AlphaPDF extends Fpdi
 {
-    var $extgstates = array();
+    protected $extgstates = array();
 
     // alpha: real value from 0 (transparent) to 1 (opaque)
     // bm:    blend mode, one of the following:
@@ -51,23 +48,23 @@ class AlphaPDF extends Fpdi\Fpdi
         {
             $this->_newobj();
             $this->extgstates[$i]['n'] = $this->n;
-            $this->_out('<</Type /ExtGState');
+            $this->_put('<</Type /ExtGState');
             $parms = $this->extgstates[$i]['parms'];
-            $this->_out(sprintf('/ca %.3F', $parms['ca']));
-            $this->_out(sprintf('/CA %.3F', $parms['CA']));
-            $this->_out('/BM '.$parms['BM']);
-            $this->_out('>>');
-            $this->_out('endobj');
+            $this->_put(sprintf('/ca %.3F', $parms['ca']));
+            $this->_put(sprintf('/CA %.3F', $parms['CA']));
+            $this->_put('/BM '.$parms['BM']);
+            $this->_put('>>');
+            $this->_put('endobj');
         }
     }
 
     function _putresourcedict()
     {
         parent::_putresourcedict();
-        $this->_out('/ExtGState <<');
+        $this->_put('/ExtGState <<');
         foreach($this->extgstates as $k=>$extgstate)
-            $this->_out('/GS'.$k.' '.$extgstate['n'].' 0 R');
-        $this->_out('>>');
+            $this->_put('/GS'.$k.' '.$extgstate['n'].' 0 R');
+        $this->_put('>>');
     }
 
     function _putresources()
@@ -77,29 +74,4 @@ class AlphaPDF extends Fpdi\Fpdi
     }
 }
 
-
-$pdf = new AlphaPDF();
-
-$pdf->AddPage();
-
-$pageCount = $pdf->setSourceFile(__DIR__ . '/../tests/_files/pdfs/transparency/ex74.pdf');
-$tplIdA = $pdf->importPage(1, 'CropBox', true);
-$tplIdB = $pdf->importPage(1, 'CropBox', false);
-
-$pdf->SetAlpha(.1);
-
-$pdf->useTemplate($tplIdA, 40, 50, 100);
-$pdf->useTemplate($tplIdB, 160, 50, 100);
-
-$pdf->Output('alpha-test.pdf', 'F');
-
-echo microtime(true) - $start;
-echo "<br>";
-var_dump(memory_get_peak_usage());
-echo "<br>";
-echo filesize('alpha-test.pdf');
-
 ?>
-
-<iframe src="http://pdfanalyzer2.dev1.setasign.local/plugin?file=<?php echo urlencode(realpath('alpha-test.pdf')); ?>" width="100%" height="96%"></iframe>
-

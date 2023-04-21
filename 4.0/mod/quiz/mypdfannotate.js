@@ -234,28 +234,22 @@ function download(filename, text) {
 	  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	  xmlhttp.onreadystatechange = function() {
 
-		if (this.status ==200 ) {
+		if (this.readyState==4 && this.status ==200 ) {
 			alert("file has been saved");
 			console.log(this.responseText);
 		}
 		// }
-		else{
+		else if (this.status !=200){
 			console.log(this.readyState, this.status);
 			alert("not able to save file");
 		}
 
 	  };
 
-	  // 			xhr.onload = function() {
 	  console.log("URL");
 	  console.log(furl);
 	  xmlhttp.send("id=" + value + "&contextid=" + contextid + "&attemptid="+attemptid + "&filename=" + filename + "&furl=" + furl);
-	//   xmlhttp.send("&contextid=" + contextid);
-	//   xmlhttp.send("&attemptid="+attemptid);
-	//   xmlhttp.send("&filename=" + filename);
-	  
 
-    //   download("values3", value);
     });
 };
 
@@ -287,8 +281,6 @@ PDFAnnotate.prototype.serializePdf = function (callback) {
 			pages: pageAnnotations,
 		  };
 		  callback(JSON.stringify(data));
-		  // var value = JSON.stringify((data), null, 4);
-		  // download("values3", value);
 		}
 	  });
 	});
@@ -299,11 +291,6 @@ PDFAnnotate.prototype.serializePdf = function (callback) {
 	  },
 	  pages: pageAnnotations,
 	};
-	// console.log(pageAnnotations);
-	// var k=callback(JSON.stringify(data))
-	// // var value = JSON.stringify((data), null, 4);
-	// download("values3", k);
-	
   };
 
 PDFAnnotate.prototype.setColor = function (color) {

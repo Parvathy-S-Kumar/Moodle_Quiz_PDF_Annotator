@@ -46,17 +46,17 @@
     },
     {
         "name": "setasign/fpdi",
-        "version": "v2.3.7",
-        "version_normalized": "2.3.7.0",
+        "version": "v2.3.6",
+        "version_normalized": "2.3.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Setasign/FPDI.git",
-            "reference": "bccc892d5fa1f48c43f8ba7db5ed4ba6f30c8c05"
+            "reference": "6231e315f73e4f62d72b73f3d6d78ff0eed93c31"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Setasign/FPDI/zipball/bccc892d5fa1f48c43f8ba7db5ed4ba6f30c8c05",
-            "reference": "bccc892d5fa1f48c43f8ba7db5ed4ba6f30c8c05",
+            "url": "https://api.github.com/repos/Setasign/FPDI/zipball/6231e315f73e4f62d72b73f3d6d78ff0eed93c31",
+            "reference": "6231e315f73e4f62d72b73f3d6d78ff0eed93c31",
             "shasum": ""
         },
         "require": {
@@ -76,7 +76,7 @@
         "suggest": {
             "setasign/fpdf": "FPDI will extend this class but as it is also possible to use TCPDF or tFPDF as an alternative. There's no fixed dependency configured."
         },
-        "time": "2023-02-09T10:38:43+00:00",
+        "time": "2021-02-11T11:37:01+00:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {

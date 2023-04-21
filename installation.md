@@ -18,7 +18,34 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
 
     * (optional) now to check imagemagick is working , convert a png file to a pdf ,in terminal run 
         * `convert file.png file.pdf`
+        
+### Steps to add Quiz Annotator to Moodle
 
+1. Download the zip file from this repository, extract in and copy the extracted folder moodle_quiz_annotator to the moodle root folder location `/path/to/moodle`. For example in ubuntu directory structure should be like this-
+    ```bash
+      .
+      ├── /var/www/html/moodle/
+      └── /var/www/html/moodle_quiz_annotator
+    ```
+
+<details><summary> :warning: warning </summary>
+ 
+#### after step 3 these files are going to be changed
+    * moodle/quesiton/type/essay/renderer.php
+    * moodle/mod/quiz/comment.php
+</details>
+
+ 
+
+2. Go to the moodle_quiz_annotator and in terminal run , as of now it supports MOODLE_VERSION 4.0
+    * `sudo make quiz_annotator MOODLE_VERSION=x.x` 
+    * for example _sudo make quiz_annotator MOODLE_VERSION=4.0_
+
+
+### Steps to remove Quiz Annotator from  Moodle
+1. Go to the moodle_quiz_qnnotator folder ,open terminal and run 
+    * `sudo make restore`
+    
 ### Installation
 - The files added as a part of this project are
 	1. parser.php

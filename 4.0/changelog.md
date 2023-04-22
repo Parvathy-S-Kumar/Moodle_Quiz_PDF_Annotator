@@ -16,6 +16,8 @@
 
 ### modification made in existing files
 
+___NOTE: Line numbers mentioned below are with respect to Moodle 4.0 and it may change depending on the installed version.___
+
 - in file /question/type/essay/renderer.php
 
     - new function from line 115 to 155  

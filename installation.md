@@ -49,8 +49,7 @@ __Note you might need to change the variable MOODLE in Makefile according to you
     * `sudo make restore`
     
 ### Support for other versions
-User can go through the [changelog](https://github.com/Parvathy-S-Kumar/Moodle_Quiz_PDF_Annotator/blob/main/4.0/changelog.md) and do the following by referring to it. 
-- Add in /mod/quiz/
+- Add in [/mod/quiz/](https://github.com/Parvathy-S-Kumar/Moodle_Quiz_PDF_Annotator/tree/main/4.0/mod/quiz)
 	1. parser.php
 	2. test.php
 	3. alphapdf.php
@@ -61,8 +60,9 @@ User can go through the [changelog](https://github.com/Parvathy-S-Kumar/Moodle_Q
 	8. mypdfannotate.css
 	9. myscript.js
 	10. mystyles.css
-	11. fpdf-fpdi folder
+	
+- Add in /mod/quiz/ the directory [fpdf-fpdi](https://github.com/Parvathy-S-Kumar/Moodle_Quiz_PDF_Annotator/tree/main/4.0/mod/quiz/fpdi-fpdf)
 
-- Modify these files
+- User can go through the [changelog](https://github.com/Parvathy-S-Kumar/Moodle_Quiz_PDF_Annotator/blob/main/4.0/changelog.md) and modify the following files.
    1. /mod/quiz/comment.php
    2. /question/type/essay/renderer.php

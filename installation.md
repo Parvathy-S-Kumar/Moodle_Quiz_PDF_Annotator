@@ -42,13 +42,15 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
     * `sudo make quiz_annotator MOODLE_VERSION=x.x` 
     * for example _sudo make quiz_annotator MOODLE_VERSION=4.0_
 
+__Note you might need to change the variable MOODLE in Makefile according to your folder name if you followed default settings while installing moodle then this is not needed but if you changed the name from moodle to something else then you need to update here the same.__   
 
 ### Steps to remove Quiz Annotator from  Moodle
 1. Go to the moodle_quiz_qnnotator folder ,open terminal and run 
     * `sudo make restore`
     
-### Installation
-- The files added as a part of this project are
+### Support for other versions
+User can go through the [changelog](https://github.com/Parvathy-S-Kumar/Moodle_Quiz_PDF_Annotator/blob/main/4.0/changelog.md) and do the following by referring to it. 
+- Add in /mod/quiz/
 	1. parser.php
 	2. test.php
 	3. alphapdf.php
@@ -59,19 +61,8 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
 	8. mypdfannotate.css
 	9. myscript.js
 	10. mystyles.css
-	11. comment.php
-	12. renderer.phps
-	13. fpdf-fpdi folder
-	
-- Files from 4 to 12 are added/modified from the git repo https://github.com/TausifIqbal/moodle_quiz_annotator
-	
+	11. fpdf-fpdi folder
 
-- Files from 4 to 8 are modified while 9 to 12 are untouched.
-	
-	
-- An additional folder for fpdf-fpdi is also to be added inside the moodle quiz module
-	
-- All files except renderer.php is inside mod/quiz. Copy these files in this location. Copy renderer.php inside /question/type/essay/ 	
-	
-
-
+- Modify these files
+   1. /mod/quiz/comment.php
+   2. /question/type/essay/renderer.php

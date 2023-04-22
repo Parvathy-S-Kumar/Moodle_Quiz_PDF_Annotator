@@ -14,12 +14,9 @@ require_once('locallib.php');
 require __DIR__ . '/test.php';
 require __DIR__ . '/parser.php';
 require __DIR__ . '/alphapdf.php';
-// require_once('parser.php');
-// require_once('test.php')
 include 'fpdi-fpdf/vendor/autoload.php';
-// include 'fpdi-fpdf/vendor/alphapdf.php';
 use setasign\Fpdi\Fpdi;
-// include 
+
 
 define("RATIO", 0.238);
 
@@ -87,7 +84,6 @@ for($i=1 ; $i <= $pagecount; $i++)
     $size = $pdf->getTemplateSize($tpl); 
     $pdf->addPage(); 
     $pdf->useTemplate($tpl, 1, 1, $size['width'], $size['height'], FALSE); 
-    // echo (count($json["pages"][$i-1]));
     if(count($json["pages"][$i-1]) ==0)
         continue;
     $objnum=count($json["pages"][$i-1][0]["objects"]);
@@ -105,7 +101,6 @@ for($i=1 ; $i <= $pagecount; $i++)
         else if($arr["type"]=="rect")
         {
             draw_rect($arr,$pdf);
-            echo "Hello";
         }
     }
 }
@@ -115,7 +110,6 @@ $pdf->Output('F','outputmoodle.pdf');
 
 $fname='outputmoodle.pdf';
 $temppath = './' . $fname;
-// echo $temppath;
 
 $fs = get_file_storage();
 // Prepare file record object
@@ -137,7 +131,6 @@ if($doesExists === true)
 // finally save the file (creating a new file)
 $fs->create_file_from_pathname($fileinfo, $temppath);
 
-// $del_file="values.txt"
 shell_exec("rm -rf values.txt");
 shell_exec("rm -rf dummy.pdf");
 shell_exec("rm -rf outputmoodle.pdf");

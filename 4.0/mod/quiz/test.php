@@ -1,11 +1,8 @@
 <?php
-// require 'newparser.php';
 function draw_path($arr, $pdf) 
 {
     $list=parser_path($arr);
-    // print_r ($list);
     $stroke = process_color(end($list));
-    // print_r ($stroke);
     $pdf->SetDrawColor($stroke[0], $stroke[1], $stroke[2]);
     for($k = 0; $k < sizeof($list) - 2; $k++) {
         $pdf->Line($list[$k][0], 
@@ -22,10 +19,8 @@ function insert_text($arr,$pdf)
     $list=parser_text($arr);
     $color = process_color($list[5]);
     $pdf->SetTextColor($color[0], $color[1], $color[2]);
-    // $pdf->SetTextColor(0,0,0);
     $pdf->SetFont('Times');
     $pdf->SetFontSize(($list[6]/1.6));
-    // print_r($list);
     $pdf->text($list[0],
     $list[1] + $list[3],
     $list[4]);

@@ -17,7 +17,7 @@ function parser_path($arr)
         if($i==0 || $i== $len-2)
             continue;
 
-        // echo gettype($arr["path"][$i][1]);
+        
         array_push($temp,normalize($arr["path"][$i][1]));
         array_push($temp,normalize($arr["path"][$i][2]));
         array_push($list,$temp);
@@ -27,7 +27,6 @@ function parser_path($arr)
         array_push($list,$temp);
     }
     array_push($list,$arr["stroke"]);
-   print_r($list);
    return $list;
 }
 
@@ -68,17 +67,15 @@ function process_color($str) {
         $val =array();
         list($r, $g, $b) = sscanf($str, "#%02x%02x%02x");
         $val=[$r, $g, $b];
-        // print_r($val);
+   
         
         
     if (preg_match('/rgb/', $str)) 
         {
             $str = substr($str, 5,-1);
-            print_r($str);
             $val = explode(",", $str); 
         }
     }
-    // print_r($val);
     return $val;
 }
 ?>

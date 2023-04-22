@@ -174,31 +174,6 @@ PDFAnnotate.prototype.enableRectangle = function () {
 	return false;
 }
 
-PDFAnnotate.prototype.addImageToCanvas = function () {
-	var inst = this;
-	var fabricObj = inst.fabricObjects[inst.active_canvas];
-
-	if (fabricObj) {
-		var inputElement = document.createElement("input");
-		inputElement.type = 'file'
-		inputElement.accept = ".jpg,.jpeg,.png,.PNG,.JPG,.JPEG";
-		inputElement.onchange = function() {
-			var reader = new FileReader();
-			reader.addEventListener("load", function () {
-				inputElement.remove()
-				var image = new Image();
-				image.onload = function () {
-					fabricObj.add(new fabric.Image(image))
-				}
-				image.src = this.result;
-			}, false);
-			reader.readAsDataURL(inputElement.files[0]);
-		}
-		document.getElementsByTagName('body')[0].appendChild(inputElement)
-		inputElement.click()
-	} 
-	return false;
-}
 
 PDFAnnotate.prototype.deleteSelectedObject = function () {
 	var inst = this;
@@ -210,44 +185,23 @@ PDFAnnotate.prototype.deleteSelectedObject = function () {
 	return false;
 }
 
-function download(filename, text) {
-	var element = document.createElement('a');
-	element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-	element.setAttribute('download', filename);
-  
-	element.style.display = 'none';
-	document.body.appendChild(element);
-  
-	element.click();
-  
-	document.body.removeChild(element);
-  }
-
   PDFAnnotate.prototype.savePdf = function (fileName) {
     pdf.serializePdf(function (string) {
       var value = JSON.stringify(JSON.parse(string), null, 4);
 	  var xmlhttp = new XMLHttpRequest();
-	  console.log("Entered this function");
 	  xmlhttp.open("POST", "upload.php", true);
-	//   downloada(furl,'testoutp.pdf');
-	  console.log("testing download");
 	  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	  xmlhttp.onreadystatechange = function() {
 
 		if (this.readyState==4 && this.status ==200 ) {
 			alert("file has been saved");
-			console.log(this.responseText);
 		}
 		// }
 		else if (this.status !=200){
-			console.log(this.readyState, this.status);
 			alert("not able to save file");
 		}
 
 	  };
-
-	  console.log("URL");
-	  console.log(furl);
 	  xmlhttp.send("id=" + value + "&contextid=" + contextid + "&attemptid="+attemptid + "&filename=" + filename + "&furl=" + furl);
 
     });
@@ -262,17 +216,13 @@ PDFAnnotate.prototype.serializePdf = function (callback) {
 	}
 	inst.fabricObjects.forEach(function (fabricObject,index) {
 	  fabricObject.clone(function (fabricObjectCopy) {
-		// console.log(index);
 		fabricObjectCopy.setBackgroundImage(null);
 		fabricObjectCopy.setBackgroundColor('');
 		if(fabricObjectCopy._objects.length !== 0)
 		{
-		//   console.log(fabricObjectCopy._objects.length);
-		pageAnnotations[index].push(fabricObjectCopy);
+			pageAnnotations[index].push(fabricObjectCopy);
 		}
 		if (index+1 === inst.fabricObjects.length) {
-		  console.log("Hello");
-		console.log(inst.orientation);
 		  var data = {
 			page_setup: {
 			  format: inst.format,

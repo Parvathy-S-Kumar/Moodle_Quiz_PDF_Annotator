@@ -37,7 +37,7 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
 
  
 
-2. Using the following commands, go to the Moodle_Quiz_PDF_Annotator directory and copy the required files
+2. To switch to Moodle_Quiz_PDF_Annotator directory and copy the required files by executing the following commands.
     * `cd Moodle_Quiz_PDF_Annotator/`
     * `sudo make quiz_annotator MOODLE_VERSION=x.x` 
     * for example _sudo make quiz_annotator MOODLE_VERSION=4.0_

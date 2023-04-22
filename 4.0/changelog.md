@@ -26,19 +26,18 @@
           _get_filenames()_    
 
     - modified function  
-        qtype_essay_renderer ::  
-          formulation_and_controls  
-            (line no : 77 to 78) added new variable $annotatedfiles  
-            (line no : 86 to 87)we initialized the variable $annotatedfiles  
-            by calling $this->feedback_files_read_only($qa, $options)  
-            (line no : 103 to 109) we are rendering the annotatedfiles
+        _qtype_essay_renderer ::_    
+          _formulation_and_controls_    
+            (line no : 77 to 78) _added new variable $annotatedfiles_      
+            (line no : 86 to 87) _initialized the variable $annotatedfiles by calling $this->feedback_files_read_only($qa, $options)_      
+            (line no : 103 to 109) _rendering the annotatedfiles_    
 
     
 - in file /mod/quiz/comment.php
     -  line 111 to 116 is removed and  replaced it with new code
         from line no 111 to 157  
-        the purpose of this is to create a dropdown to  
+        _the purpose of this is to create a dropdown to  
         show all the attached files and select one of them  
         after selecting it will open that file into a new   
-        annotator by calling the file annotator.php (at iine 123)   
+        annotator by calling the file annotator.php (at iine 123)_  
 

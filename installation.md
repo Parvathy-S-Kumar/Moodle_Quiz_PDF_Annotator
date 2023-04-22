@@ -37,7 +37,8 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
 
  
 
-2. Go to the moodle_quiz_annotator and in terminal run , as of now it supports MOODLE_VERSION 4.0
+2. Using the following commands, go to the Moodle_Quiz_PDF_Annotator directory and copy the required files
+    * `cd Moodle_Quiz_PDF_Annotator/`
     * `sudo make quiz_annotator MOODLE_VERSION=x.x` 
     * for example _sudo make quiz_annotator MOODLE_VERSION=4.0_
 

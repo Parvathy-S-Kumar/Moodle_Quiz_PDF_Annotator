@@ -2,7 +2,7 @@
 
 MOODLE="moodle"
 MOD_QUIZ="mod/quiz"
-MOODLE_VERSION="3.11"
+MOODLE_VERSION="4.0"
 QUESTION_TYPE_ESSAY="question/type/essay"
 
 all: quiz_annotator 
@@ -13,10 +13,10 @@ quiz_annotator $(MOODLE_VERSION): check_version  build backup generate
 
 check_version:
 ifeq ($(MOODLE_VERSION),4.0)
-	@echo "installing version 3.6 .. "
+	@echo "installing version 4.0 .. "
 
 else 
-	$(error only MOODLE_VERSION 3.6 and 3.11 is supported)
+	$(error only MOODLE_VERSION 4.0 is supported)
 endif
 
 build:

@@ -17,18 +17,18 @@
 
 - in file /question/type/essay/renderer.php
 
-    - new function from line 115 to 155
-        qtype_essay_renderer:: 
-          feedback_files_read_only()
+    - new function from line 115 to 155  
+        _qtype_essay_renderer::_     
+          _feedback_files_read_only()_  
 
-    - new function from line 157 to 183
-        qtype_essay_renderer::  
-          get_filenames()
+    - new function from line 157 to 183  
+        _qtype_essay_renderer::_      
+          _get_filenames()_    
 
-    - modified function
+    - modified function  
         qtype_essay_renderer ::  
           formulation_and_controls  
-            (line no : 77 to 78)we added new variable $annotatedfiles  
+            (line no : 77 to 78) added new variable $annotatedfiles  
             (line no : 86 to 87)we initialized the variable $annotatedfiles  
             by calling $this->feedback_files_read_only($qa, $options)  
             (line no : 103 to 109) we are rendering the annotatedfiles

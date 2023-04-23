@@ -55,6 +55,9 @@ restore:
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/mypdfannotate.js
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/myscript.js 
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/mystyles.css
+	@rm -f ./../${MOODLE}/${MOD_QUIZ}/parser.php
+	@rm -f ./../${MOODLE}/${MOD_QUIZ}/test.php
+	@rm -r ./../${MOODLE}/${MOD_QUIZ}/fpdi-fpdf
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/upload.php
 	@rm -f ./../${MOODLE}/${QUESTION_TYPE_ESSAY}/renderer.php
 	@echo "restoring files"

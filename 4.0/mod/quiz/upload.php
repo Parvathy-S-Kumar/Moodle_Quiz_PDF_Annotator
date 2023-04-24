@@ -38,13 +38,13 @@ $fileinfo = array(
     'filepath' => $filepath,
     'filename' => $filename);
 
+//Get the serialisepdf value contents and convert into php arrays
 $values = $value;
 $json = json_decode($values,true);
 
-// //Get the page orientation
+//Get the page orientation
 $orientation=$json["page_setup"]['orientation'];
 $orientation=($orientation=="portrait")? 'p' : 'l';
-echo $orientation;
 
 //To convert PDF versions to 1.4 if the version is above it since FPDI parser will only work for PDF versions upto 1.4
 $file = 'dummy.pdf'; 

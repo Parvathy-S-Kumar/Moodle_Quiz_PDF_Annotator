@@ -44,7 +44,7 @@ function parser_path($arr)
 //Parser for text
 function parser_text($arr)
 {
-    $list=array();
+    $list = array();
     // left and top refers to x and y coordinates of top left corner
     array_push($list,normalize($arr["left"]),normalize($arr["top"]),normalize($arr["width"]),normalize($arr["height"]));
     // text refers to the content and fill is the color of the text
@@ -57,7 +57,7 @@ function parser_text($arr)
 //Parser for rectangle
 function parser_rectangle($arr)
 {
-    $list=array();
+    $list = array();
     // scaleX and scaleY is 1 if the rectangle is not transformed
     // width and height remains same and the scaleX and scaleY changed during transformation
     $width=(normalize($arr["width"]))*($arr["scaleX"]); 
@@ -67,6 +67,7 @@ function parser_rectangle($arr)
     return $list;
 
 }
+
 
 
 //Parser for processing color format of fabricjs to fpdf

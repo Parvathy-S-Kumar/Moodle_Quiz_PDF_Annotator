@@ -26,6 +26,8 @@ $filearea = 'response_attachments';
 $filepath = '/';
 $itemid = $attemptid;
 
+echo $contextid;
+
 $fs = get_file_storage();
 // Prepare file record object
 $fileinfo = array(
@@ -36,20 +38,13 @@ $fileinfo = array(
     'filepath' => $filepath,
     'filename' => $filename);
 
-//Created a new file with the annotation data
-$fn = "values.txt"; // name the file
-$fi = fopen("./" .$fn, 'w'); // open the file path
-fwrite($fi, $value); //save data
-fclose($fi);
-
-//Get the contents of the file and convert into php arrays
-$values = file_get_contents("values.txt");
+//Get the serialisepdf value contents and convert into php arrays
+$values = $value;
 $json = json_decode($values,true);
 
 //Get the page orientation
 $orientation=$json["page_setup"]['orientation'];
 $orientation=($orientation=="portrait")? 'p' : 'l';
-
 
 //To convert PDF versions to 1.4 if the version is above it since FPDI parser will only work for PDF versions upto 1.4
 $file = 'dummy.pdf'; 
@@ -71,7 +66,6 @@ if ($filepdf)
 fclose($filepdf);
 }
 
-
 //Using FPDF and FPDI to annotate
 $pdf = new AlphaPDF($orientation); 
 if(file_exists("./".$file))
@@ -85,9 +79,9 @@ for($i=1 ; $i <= $pagecount; $i++)
     $size = $pdf->getTemplateSize($tpl); 
     $pdf->addPage(); 
     $pdf->useTemplate($tpl, 1, 1, $size['width'], $size['height'], FALSE); 
-    if(count($json["pages"][$i-1]) ==0)
+    if(count((array)$json["pages"][$i-1]) ==0)
         continue;
-    $objnum=count($json["pages"][$i-1][0]["objects"]);
+    $objnum=count((array)$json["pages"][$i-1][0]["objects"]);
     for($j=0;$j<$objnum;$j++)
     {
         $arr = $json["pages"][$i-1][0]["objects"][$j];
@@ -133,7 +127,6 @@ if($doesExists === true)
 $fs->create_file_from_pathname($fileinfo, $temppath);
 
 // Deleting temporary files
-shell_exec("rm -rf values.txt");
 shell_exec("rm -rf dummy.pdf");
 shell_exec("rm -rf outputmoodle.pdf");
 ?>

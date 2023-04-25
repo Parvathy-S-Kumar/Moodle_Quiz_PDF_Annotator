@@ -4,7 +4,7 @@
  */
 
 // /**
-//  * @updatedby Tausif Iqbal and Vishal Rao
+//  * @updatedby Asha Jose and Parvathy S Kumar
 //  */
 var PDFAnnotate = function(container_id, url, options = {}) {
 	this.number_of_pages = 0;
@@ -184,7 +184,7 @@ PDFAnnotate.prototype.deleteSelectedObject = function () {
 	return false;
 }
 
-
+//Updated by Asha Jose and Parvathy S Kumar
   PDFAnnotate.prototype.savePdf = function (fileName) {
     pdf.serializePdf(function (string) {
       var value = JSON.stringify(JSON.parse(string), null, 4);
@@ -241,6 +241,7 @@ PDFAnnotate.prototype.serializePdf = function (callback) {
 	};
 	
   };
+//Updation ends
 
 PDFAnnotate.prototype.setColor = function (color) {
 	var inst = this;

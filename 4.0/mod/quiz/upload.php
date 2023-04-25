@@ -9,6 +9,8 @@
  * Then save it temporarily in this directory.
  *
  * Then create new file in databse using this temporary file.
+ * All parts of this file excluding preparing the file record object and adding file to the database is modified by us
+ *
  */
 
 require_once('../../config.php');

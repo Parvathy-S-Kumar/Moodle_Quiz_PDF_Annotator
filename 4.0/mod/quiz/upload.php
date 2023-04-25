@@ -2,10 +2,12 @@
 
 /**
  * @author Tausif Iqbal, Vishal Rao
+ * @Updated by Asha Jose, Parvathy S Kumar
  * This page saves annotated pdf to database.
  * 
- * It gets the file data from JavaScript through POST request.
+ * It gets the annotation data from JavaScript through POST request. Then annotate the file using FPDI and FPDF
  * Then save it temporarily in this directory.
+ *
  * Then create new file in databse using this temporary file.
  */
 
@@ -114,6 +116,7 @@ $pdf->Output('F','outputmoodle.pdf');
 $fname='outputmoodle.pdf';
 $temppath = './' . $fname;
 
+//Untouched 
 $fs = get_file_storage();
 // Prepare file record object
 $fileinfo = array(
@@ -133,6 +136,7 @@ if($doesExists === true)
 }
 // finally save the file (creating a new file)
 $fs->create_file_from_pathname($fileinfo, $temppath);
+//Untouched portion ends
 
 // Deleting temporary files
 shell_exec("rm -rf dummy.pdf");

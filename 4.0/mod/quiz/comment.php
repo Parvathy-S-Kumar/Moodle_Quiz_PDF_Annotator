@@ -21,6 +21,7 @@
  * @package   mod_quiz
  * @copyright gustav delius 2006
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * No changes made by Asha Jose and Parvathy S Kumar
  */
 require_once('../../config.php');
 require_once('locallib.php');

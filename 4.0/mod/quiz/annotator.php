@@ -79,7 +79,7 @@ $itemid = $attemptobj->get_attemptid();
 $supported=1;
 // checking if file is not pdf
 $format = explode(".", $filename);
-$format = end($format); //Changed
+$format = end($format);     //Changed
 $ispdf = true;
 if($format !== 'pdf')
 {
@@ -147,8 +147,8 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     {
         echo 'Message: ' .$e->getMessage();
     }
-    
     //Updation ends
+
     if($supported == 1)
     {
         shell_exec($command);

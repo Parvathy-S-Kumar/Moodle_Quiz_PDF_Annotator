@@ -1,10 +1,10 @@
 /**
  * @updatedby Tausif Iqbal and Vishal Rao
+ * No changes made by Asha Jose and Parvathy S Kumar
  */
 // fileurl has been assigned its correct value in comment.php file
 var pdf = new PDFAnnotate("pdf-container", fileurl, {
     onPageUpdated(page, oldData, newData) {
-      // console.log(page, oldData, newData);
     },
     ready() {
     },

@@ -3,13 +3,14 @@
 /**
  * @author Tausif Iqbal, Vishal Rao
  * @Updated by Asha Jose, Parvathy S Kumar
+ * All parts of this file excluding preparing the file record object and adding file to the database is modified by us
+ *
  * This page saves annotated pdf to database.
  * 
  * It gets the annotation data from JavaScript through POST request. Then annotate the file using FPDI and FPDF
  * Then save it temporarily in this directory.
  *
  * Then create new file in databse using this temporary file.
- * All parts of this file excluding preparing the file record object and adding file to the database is modified by us
  *
  */
 

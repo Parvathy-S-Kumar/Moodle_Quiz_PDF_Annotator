@@ -3,9 +3,9 @@
  * Author: Ravisha Heshan
  */
 
-// /**
-//  * @updatedby Asha Jose and Parvathy S Kumar
-//  */
+ /**
+ * @updatedby Asha Jose and Parvathy S Kumar
+ */
 var PDFAnnotate = function(container_id, url, options = {}) {
 	this.number_of_pages = 0;
 	this.pages_rendered = 0;

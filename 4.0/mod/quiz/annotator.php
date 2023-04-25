@@ -125,17 +125,25 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
 
     
     // convert that file into PDF, based on mime type (NOTE: this will be created in the cwd)
-    if($mime === "image")
-        $command = "convert " . $original_file->get_filename() . " dummy.pdf";
-    else if($mime=="text")
+    try
     {
-        $command = "convert TEXT:" . $original_file->get_filename() . " dummy.pdf";
+        if($mime === "image")
+            $command = "convert " . $original_file->get_filename() . " dummy.pdf";
+        else if($mime=="text")
+        {
+            $command = "convert TEXT:" . $original_file->get_filename() . " dummy.pdf";
+        }
+        else
+        {
+            echo "<script>alert('Unsupported File Type. Unable to annotate');</script>";
+            $supported=0;
+        }
     }
-    else
+    catch(Exception $e)
     {
-        echo "<script>alert('Unsupported File Type. Unable to annotate');</script>";
-        $supported=0;
+        echo 'Message: ' .$e->getMessage();
     }
+    
 
     if($supported == 1)
     {

@@ -195,10 +195,10 @@ PDFAnnotate.prototype.deleteSelectedObject = function () {
 	  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	  xmlhttp.onreadystatechange = function() {
 
-		if (this.status ==200 && this.readyState ==4  ) {
+		if (this.status ==200 && this.readyState ==4) {
 			alert("file has been saved");
 		}
-		else if (this.status !=200 ) {
+		else if (this.status !=200 && this.readyState ==4) {
 			alert("Not able to save the file");
 		}
 

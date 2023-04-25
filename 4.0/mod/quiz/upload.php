@@ -28,8 +28,6 @@ $filearea = 'response_attachments';
 $filepath = '/';
 $itemid = $attemptid;
 
-echo $contextid;
-
 $fs = get_file_storage();
 // Prepare file record object
 $fileinfo = array(

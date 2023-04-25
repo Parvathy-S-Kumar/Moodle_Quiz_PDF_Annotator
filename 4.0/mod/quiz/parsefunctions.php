@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @author Asha Jose, Parvathy S
  * This page contains functions that annotates using fpdf

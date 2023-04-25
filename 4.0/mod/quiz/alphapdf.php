@@ -1,4 +1,9 @@
 <?php
+/**
+ * This file is for setting transparency for color
+ * no changed made from the original extracted file
+ */
+
 include 'fpdi-fpdf/fpdf/fpdf.php';
 include 'fpdi-fpdf/fpdi/src/autoload.php';
 use setasign\Fpdi\Fpdi;

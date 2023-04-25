@@ -7,9 +7,6 @@ var pdf = new PDFAnnotate("pdf-container", fileurl, {
       // console.log(page, oldData, newData);
     },
     ready() {
-      console.log("Plugin initialized successfully");
-      console.log("FILE URL");
-      console.log(fileurl);
     },
     scale: 1.5,
     pageImageCompression: "SLOW", // FAST, MEDIUM, SLOW(Helps to control the new PDF file size)

@@ -69,7 +69,7 @@ foreach ($files as $file) {
 $attemptid = $attemptobj->get_attemptid();
 $contextid = $options->context->id;
 $filename = explode("/", $fileurl);
-$filename = end($filename); //Changed
+$filename = end($filename);     //Changed
 $filename = urldecode($filename);
 $component = 'question';
 $filearea = 'response_attachments';
@@ -91,7 +91,7 @@ $fs = get_file_storage();
 // check if the annotated pdf exists or not in database
 
 $path = getcwd();
-$original_file->copy_content_to($path . "/dummy.pdf"); //Changed
+$original_file->copy_content_to($path . "/dummy.pdf");  //Changed
 
 $doesExists = $fs->file_exists($contextid, $component, $filearea, $itemid, $filepath, $filename);
 if($doesExists === true)   // if exists then update $fileurl to the url of this file
@@ -185,7 +185,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     }
 }
 
-if($supported == 1)
+if($supported == 1) //Changed
 {
 
     // include the html file; It has all the features of annotator

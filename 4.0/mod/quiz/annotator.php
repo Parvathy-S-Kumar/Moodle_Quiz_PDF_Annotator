@@ -18,6 +18,7 @@
  * This page allows the teacher to annotate file of a particular question.
  *
  * @author Tausif Iqbal and Vishal Rao
+ * @updated by Asha Jose and Parvathy S Kumar
  * @package   mod_quiz
  * @copyright gustav delius 2006
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -68,7 +69,7 @@ foreach ($files as $file) {
 $attemptid = $attemptobj->get_attemptid();
 $contextid = $options->context->id;
 $filename = explode("/", $fileurl);
-$filename = end($filename);
+$filename = end($filename); //Changed
 $filename = urldecode($filename);
 $component = 'question';
 $filearea = 'response_attachments';
@@ -78,7 +79,7 @@ $itemid = $attemptobj->get_attemptid();
 $supported=1;
 // checking if file is not pdf
 $format = explode(".", $filename);
-$format = end($format);
+$format = end($format); //Changed
 $ispdf = true;
 if($format !== 'pdf')
 {
@@ -88,8 +89,10 @@ if($format !== 'pdf')
 
 $fs = get_file_storage();
 // check if the annotated pdf exists or not in database
+
 $path = getcwd();
-$original_file->copy_content_to($path . "/dummy.pdf");
+$original_file->copy_content_to($path . "/dummy.pdf"); //Changed
+
 $doesExists = $fs->file_exists($contextid, $component, $filearea, $itemid, $filepath, $filename);
 if($doesExists === true)   // if exists then update $fileurl to the url of this file
 {
@@ -124,6 +127,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     $mime = (explode("/", $mime))[0];
 
     
+    //Updated
     // convert that file into PDF, based on mime type (NOTE: this will be created in the cwd)
     try
     {
@@ -144,7 +148,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
         echo 'Message: ' .$e->getMessage();
     }
     
-
+    //Updation ends
     if($supported == 1)
     {
         shell_exec($command);

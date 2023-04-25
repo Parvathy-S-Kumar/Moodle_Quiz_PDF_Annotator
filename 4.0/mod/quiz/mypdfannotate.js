@@ -5,6 +5,7 @@
 
  /**
  * @updatedby Asha Jose and Parvathy S Kumar
+ * SerializePDF and SavePDF functions are modified by us. 
  */
 
 var PDFAnnotate = function(container_id, url, options = {}) {

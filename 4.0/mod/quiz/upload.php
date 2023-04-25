@@ -55,14 +55,22 @@ if ($filepdf)
     preg_match_all('!\d+!', $line_first, $matches);	
     // save that number in a variable
     $pdfversion = implode('.', $matches[0]);
-    if($pdfversion > "1.4")
+    try
     {
-        $srcfile_new="newdummy.pdf";
-        $srcfile=$file;
-        shell_exec('gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE \
-        -dBATCH -sOutputFile="'.$srcfile_new.'" "'.$srcfile.'"'); 
-        $file=$srcfile_new;
+        if($pdfversion > "1.4")
+        {
+            $srcfile_new="newdummy.pdf";
+            $srcfile=$file;
+            shell_exec('gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE \
+            -dBATCH -sOutputFile="'.$srcfile_new.'" "'.$srcfile.'"'); 
+            $file=$srcfile_new;
+        }
     }
+    catch (Exception $e)
+    {
+        echo 'Message: ' .$e->getMessage();
+    }
+    
 fclose($filepdf);
 }
 

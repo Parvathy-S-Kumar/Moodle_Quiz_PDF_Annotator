@@ -49,8 +49,11 @@ $json = json_decode($values,true);
 $orientation=$json["page_setup"]['orientation'];
 $orientation=($orientation=="portrait")? 'p' : 'l';
 
+//Referencing the file from the temp directory 
+$path= $CFG->tempdir;
+$file = $path . '/dummy.pdf'; 
+
 //To convert PDF versions to 1.4 if the version is above it since FPDI parser will only work for PDF versions upto 1.4
-$file = 'dummy.pdf'; 
 $filepdf = fopen($file,"r");
 if ($filepdf) 
 {
@@ -79,7 +82,7 @@ fclose($filepdf);
 
 //Using FPDF and FPDI to annotate
 $pdf = new AlphaPDF($orientation); 
-if(file_exists("./".$file))
+if(file_exists($file))
     $pagecount = $pdf->setSourceFile($file); 
 else
     die('\nSource PDF not found!'); 
@@ -112,10 +115,10 @@ for($i=1 ; $i <= $pagecount; $i++)
 }
 
 
-$pdf->Output('F','outputmoodle.pdf');
+$pdf->Output('F', $path . '/outputmoodle.pdf');
 
 $fname='outputmoodle.pdf';
-$temppath = './' . $fname;
+$temppath = $path . '/' . $fname;
 
 //Untouched 
 $fs = get_file_storage();
@@ -140,7 +143,7 @@ $fs->create_file_from_pathname($fileinfo, $temppath);
 //Untouched portion ends
 
 // Deleting temporary files
-shell_exec("rm -rf dummy.pdf");
-shell_exec("rm -rf outputmoodle.pdf");
+unlink($temppath);
+unlink($file);   
 ?>
 

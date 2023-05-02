@@ -90,8 +90,13 @@ if($format !== 'pdf')
 $fs = get_file_storage();
 // check if the annotated pdf exists or not in database
 
-$path = getcwd();
-$original_file->copy_content_to($path . "/dummy.pdf");  //Changed
+$path = $CFG->tempdir;
+$original_file->copy_content_to($path . "/dummy.pdf");
+if(!(file_exists("dummy.pdf")))
+{
+    $supported=0;
+    throw new Exception("Permission  Denied");
+}  //Changed
 
 $doesExists = $fs->file_exists($contextid, $component, $filearea, $itemid, $filepath, $filename);
 if($doesExists === true)   // if exists then update $fileurl to the url of this file
@@ -99,7 +104,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     // the file object
     $file = $fs->get_file($contextid, $component, $filearea, $itemid, $filepath, $filename);
     // create url of this file
-    $path = getcwd();
+    $path = $CFG->tempdir;
     $file->copy_content_to($path . "/dummy.pdf");
 
     $url = file_encode_url(new moodle_url('/pluginfile.php'), '/' . implode('/', array(
@@ -118,8 +123,8 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     // annotated PDF doesn't exists and the original file is not a PDF file
     // so we need to create PDF first and update fileurl to this PDF file
 
-    // copy non-pdf file to current working directory
-    $path = getcwd();
+    // copy non-pdf file to the temp directory of moodledata
+    $path = $CFG->tempdir;
     $original_file->copy_content_to($path . "/" . $original_file->get_filename());
     
     // get the mime-type of the original file

@@ -169,7 +169,7 @@ PDFAnnotate.prototype.enableRectangle = function () {
 		width: 100,
 		height: 100,
 		fill: inst.color,
-		stroke: inst.borderColor,
+		stroke: '#4Dff0000',
 		strokeSize: inst.borderSize
 	});
 	fabricObj.add(rect);

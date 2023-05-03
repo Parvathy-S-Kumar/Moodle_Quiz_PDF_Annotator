@@ -2,7 +2,7 @@
 
 MOODLE="moodle"
 MOD_QUIZ="mod/quiz"
-MOODLE_VERSION="4.0"
+MOODLE_VERSION=4.0
 QUESTION_TYPE_ESSAY="question/type/essay"
 
 all: quiz_annotator 

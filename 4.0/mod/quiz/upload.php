@@ -65,12 +65,12 @@ if ($filepdf)
     {
         if($pdfversion > "1.4")
         {
-            //
-            $srcfile_new="newdummy.pdf";
+            $srcfile_new=$path."/newdummy.pdf";
             $srcfile=$file;
             shell_exec('gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE \
             -dBATCH -sOutputFile="'.$srcfile_new.'" "'.$srcfile.'"'); 
             $file=$srcfile_new;
+            unlink($srcfile);          // to remove original dummy.pdf
         }
     }
     catch (Exception $e)

@@ -93,8 +93,7 @@ $fs = get_file_storage();
 $path = $CFG->tempdir;
 $original_file->copy_content_to($path . "/dummy.pdf");
 
-//
-if(!(file_exists("dummy.pdf")))
+if(!(file_exists($path."/dummy.pdf")))
 {
     $supported=0;
     throw new Exception("Permission  Denied");

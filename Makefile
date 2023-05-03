@@ -14,9 +14,10 @@ quiz_annotator $(MOODLE_VERSION): check_version  build backup generate
 check_version:
 ifeq ($(MOODLE_VERSION),4.0)
 	@echo "installing version 4.0 .. "
-
+else ifeq ($(MOODLE_VERSION),4.1)
+	@echo "installing version 4.1 .. "
 else 
-	$(error only MOODLE_VERSION 4.0 is supported)
+	$(error only MOODLE_VERSION 4.0 and 4.1 are supported)
 endif
 
 build:

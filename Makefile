@@ -4,6 +4,7 @@ MOODLE="moodle"
 MOD_QUIZ="mod/quiz"
 MOODLE_VERSION=4.0
 QUESTION_TYPE_ESSAY="question/type/essay"
+TEMP_VERSION=4.0
 
 all: quiz_annotator 
 
@@ -12,12 +13,16 @@ quiz_annotator $(MOODLE_VERSION): check_version  build backup generate
 	@echo "quiz annotator is ready to use."
 
 check_version:
+	$(eval TEMP_VERSION=${MOODLE_VERSION})
 ifeq ($(MOODLE_VERSION),4.0)
 	@echo "installing version 4.0 .. "
 else ifeq ($(MOODLE_VERSION),4.1)
 	@echo "installing version 4.1 .. "
+else ifeq ($(MOODLE_VERSION),3.11)
+	@echo "installing version 3.11 ..."
+	$(eval TEMP_VERSION=4.0)
 else 
-	$(error only MOODLE_VERSION 4.0 and 4.1 are supported)
+	$(error only MOODLE_VERSION 3.11 - 4.1 are supported)
 endif
 
 build:
@@ -32,19 +37,19 @@ backup:
 
 generate:
 	@echo "Copying php files..."
-	@cp -v -p ./${MOODLE_VERSION}/${MOD_QUIZ}/comment.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${MOODLE_VERSION}/${MOD_QUIZ}/annotator.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${MOODLE_VERSION}/${MOD_QUIZ}/myindex.html  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${MOODLE_VERSION}/${MOD_QUIZ}/mypdfannotate.css  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${MOODLE_VERSION}/${MOD_QUIZ}/mypdfannotate.js  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${MOODLE_VERSION}/${MOD_QUIZ}/myscript.js    ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${MOODLE_VERSION}/${MOD_QUIZ}/mystyles.css  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${MOODLE_VERSION}/${MOD_QUIZ}/upload.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${MOODLE_VERSION}/${MOD_QUIZ}/parser.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${MOODLE_VERSION}/${MOD_QUIZ}/parsefunctions.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${MOODLE_VERSION}/${MOD_QUIZ}/alphapdf.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -r -p ./${MOODLE_VERSION}/${MOD_QUIZ}/fpdi-fpdf  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${MOODLE_VERSION}/${QUESTION_TYPE_ESSAY}/renderer.php  ./../${MOODLE}/${QUESTION_TYPE_ESSAY}/
+	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/comment.php  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/annotator.php  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/myindex.html  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/mypdfannotate.css  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/mypdfannotate.js  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/myscript.js    ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/mystyles.css  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/upload.php  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/parser.php  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/parsefunctions.php  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/alphapdf.php  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -r -p ./${TEMP_VERSION}/${MOD_QUIZ}/fpdi-fpdf  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${TEMP_VERSION}/${QUESTION_TYPE_ESSAY}/renderer.php  ./../${MOODLE}/${QUESTION_TYPE_ESSAY}/
 	@echo "copying done"
 
 

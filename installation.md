@@ -39,8 +39,12 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
 
 2. To switch to Moodle_Quiz_PDF_Annotator directory and copy the required files by executing the following commands.
     * `cd Moodle_Quiz_PDF_Annotator/`
-    * `sudo make quiz_annotator MOODLE_VERSION=x.x` 
-    * for example _sudo make quiz_annotator MOODLE_VERSION=4.0_
+    * `sudo make quiz_annotator MOODLE_VERSION=x.x MOODLE_DATA_DIR=y` 
+    * Usage example _sudo make quiz_annotator MOODLE_VERSION=4.0 MOODLE_DATA_DIR='/var/moodledata'_
+    * The parameters MOODLE_VERSION and MOODLE_DATA_DIR are optional. 
+    * MOODLE_DATA_DIR should be set to the path of moodledata directory.
+    * Default MOODLE_VERSION is 4.0 and MOODLE_DATA_DIR is '/var/moodledata'
+    
 
 __Note you might need to change the variable MOODLE in Makefile according to your folder name if you followed default settings while installing moodle then this is not needed but if you changed the name from moodle to something else then you need to update here the same.__   
 

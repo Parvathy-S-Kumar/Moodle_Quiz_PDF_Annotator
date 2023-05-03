@@ -92,6 +92,8 @@ $fs = get_file_storage();
 
 $path = $CFG->tempdir;
 $original_file->copy_content_to($path . "/dummy.pdf");
+
+//
 if(!(file_exists("dummy.pdf")))
 {
     $supported=0;
@@ -104,7 +106,6 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     // the file object
     $file = $fs->get_file($contextid, $component, $filearea, $itemid, $filepath, $filename);
     // create url of this file
-    $path = $CFG->tempdir;
     $file->copy_content_to($path . "/dummy.pdf");
 
     $url = file_encode_url(new moodle_url('/pluginfile.php'), '/' . implode('/', array(
@@ -124,7 +125,6 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     // so we need to create PDF first and update fileurl to this PDF file
 
     // copy non-pdf file to the temp directory of moodledata
-    $path = $CFG->tempdir;
     $original_file->copy_content_to($path . "/" . $original_file->get_filename());
     
     // get the mime-type of the original file
@@ -137,10 +137,10 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     try
     {
         if($mime === "image")
-            $command = "convert " . $original_file->get_filename() . " dummy.pdf";
+            $command = "convert " . $original_file->get_filename() ." " .$path ."/dummy.pdf";
         else if($mime=="text")
         {
-            $command = "convert TEXT:" . $original_file->get_filename() . " dummy.pdf";
+            $command = "convert TEXT:" . $original_file->get_filename() ." " .$path ."/dummy.pdf";
         }
         else
         {
@@ -163,7 +163,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
         shell_exec($command);
 
         // create a PDF file in moodle database from the above created PDF file
-        $temppath = "./dummy.pdf";
+        $temppath = $path. "./dummy.pdf";
         $fileinfo = array(
             'contextid' => $contextid,
             'component' => $component,
@@ -192,7 +192,6 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
 
 if($supported == 1) //Changed
 {
-
     // include the html file; It has all the features of annotator
     include "./myindex.html";
 }

@@ -2,7 +2,7 @@
 
 /**
  * @author Tausif Iqbal, Vishal Rao
- * @Updated by Asha Jose, Parvathy S Kumar
+ * @updatedby Asha Jose, Parvathy S Kumar
  * All parts of this file excluding preparing the file record object and adding file to the database is modified by us
  *
  * This page saves annotated pdf to database.
@@ -65,6 +65,7 @@ if ($filepdf)
     {
         if($pdfversion > "1.4")
         {
+            //
             $srcfile_new="newdummy.pdf";
             $srcfile=$file;
             shell_exec('gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE \
@@ -86,6 +87,9 @@ if(file_exists($file))
     $pagecount = $pdf->setSourceFile($file); 
 else
     die('\nSource PDF not found!'); 
+
+// Deleting dummy.pdf
+unlink($file);
 
 for($i=1 ; $i <= $pagecount; $i++)
 {
@@ -114,7 +118,7 @@ for($i=1 ; $i <= $pagecount; $i++)
     }
 }
 
-
+// creating output moodle file for loading into database
 $pdf->Output('F', $path . '/outputmoodle.pdf');
 
 $fname='outputmoodle.pdf';
@@ -142,8 +146,7 @@ if($doesExists === true)
 $fs->create_file_from_pathname($fileinfo, $temppath);
 //Untouched portion ends
 
-// Deleting temporary files
-unlink($temppath);
-unlink($file);   
+// Deleting outputmoodle.pdf
+unlink($temppath);  
 ?>
 

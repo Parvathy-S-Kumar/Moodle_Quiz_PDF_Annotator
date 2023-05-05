@@ -91,6 +91,7 @@ else
 // Deleting dummy.pdf
 unlink($file);
 
+//Take the pages of PDF one-by-one and annotate them
 for($i=1 ; $i <= $pagecount; $i++)
 {
     $tpl = $pdf->importPage($i); 

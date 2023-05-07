@@ -42,15 +42,14 @@ $fileinfo = array(
     'filename' => $filename);
 
 //Get the serialisepdf value contents and convert into php arrays
-$values = $value;
-$json = json_decode($values,true);
+$json = json_decode($value,true);
 
 //Get the page orientation
 $orientation=$json["page_setup"]['orientation'];
 $orientation=($orientation=="portrait")? 'p' : 'l';
 
 //Referencing the file from the temp directory 
-$path= $CFG->tempdir;
+$path= $CFG->tempdir . '/EssayPDF';
 $file = $path . '/dummy.pdf'; 
 
 //To convert PDF versions to 1.4 if the version is above it since FPDI parser will only work for PDF versions upto 1.4

@@ -5,10 +5,11 @@ MOD_QUIZ="mod/quiz"
 MOODLE_VERSION=4.0
 QUESTION_TYPE_ESSAY="question/type/essay"
 TEMP_VERSION=4.0
+MOODLE_DATA_DIR="/var/moodledata"
 
 all: quiz_annotator 
 
-quiz_annotator $(MOODLE_VERSION): check_version  build backup generate
+quiz_annotator $(MOODLE_VERSION) $(MOODLE_DATA_DIR): check_version  build backup generate
  	
 	@echo "quiz annotator is ready to use."
 
@@ -26,8 +27,10 @@ else
 endif
 
 build:
+	@echo "Creating backup and temporary directories"
 	@mkdir -p backup/${MOD_QUIZ}
 	@mkdir -p backup/${QUESTION_TYPE_ESSAY}
+	@mkdir -p -m777 ${MOODLE_DATA_DIR}/temp/EssayPDF
 
 backup:
 	@echo "making backup ready"
@@ -69,3 +72,5 @@ restore:
 	@echo "restoring files"
 	@cp -v -p ./backup/${MOD_QUIZ}/comment.php ./../${MOODLE}/${MOD_QUIZ}/  
 	@cp -v -p ./backup/${QUESTION_TYPE_ESSAY}/renderer.php ./../${MOODLE}/${QUESTION_TYPE_ESSAY}/
+	@echo "removing temporary directory"
+	@rm -rf ${MOODLE_DATA_DIR}/temp/EssayPDF

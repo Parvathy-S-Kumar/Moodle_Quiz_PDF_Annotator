@@ -90,10 +90,10 @@ if($format !== 'pdf')
 $fs = get_file_storage();
 // check if the annotated pdf exists or not in database
 
-$path = $CFG->tempdir;
-$original_file->copy_content_to($path . "/dummy.pdf");
-
-if(!(file_exists($path."/dummy.pdf")))
+$path = $CFG->tempdir ."/EssayPDF";
+$dummyFile= $path ."/dummy.pdf";
+$original_file->copy_content_to($dummyFile);
+if(!(file_exists($dummyFile)))
 {
     $supported=0;
     throw new Exception("Permission  Denied");
@@ -105,7 +105,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     // the file object
     $file = $fs->get_file($contextid, $component, $filearea, $itemid, $filepath, $filename);
     // create url of this file
-    $file->copy_content_to($path . "/dummy.pdf");
+    $file->copy_content_to($dummyFile);
 
     $url = file_encode_url(new moodle_url('/pluginfile.php'), '/' . implode('/', array(
         $file->get_contextid(),
@@ -124,7 +124,8 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     // so we need to create PDF first and update fileurl to this PDF file
 
     // copy non-pdf file to the temp directory of moodledata
-    $original_file->copy_content_to($path . "/" . $original_file->get_filename());
+    $original_file_path=$path . "/" . $original_file->get_filename();
+    $original_file->copy_content_to($original_file_path);
     
     // get the mime-type of the original file
     $mime = mime_content_type($original_file->get_filename());
@@ -136,10 +137,10 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     try
     {
         if($mime === "image")
-            $command = "convert " . $original_file->get_filename() ." " .$path ."/dummy.pdf";
+            $command = "convert " . $original_file_path ." " .$dummyFile;
         else if($mime=="text")
         {
-            $command = "convert TEXT:" . $original_file->get_filename() ." " .$path ."/dummy.pdf";
+            $command = "convert TEXT:" . $original_file_path ." " .$dummyFile;
         }
         else
         {
@@ -162,7 +163,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
         shell_exec($command);
 
         // create a PDF file in moodle database from the above created PDF file
-        $temppath = $path. "./dummy.pdf";
+        $temppath = $dummyFile;
         $fileinfo = array(
             'contextid' => $contextid,
             'component' => $component,

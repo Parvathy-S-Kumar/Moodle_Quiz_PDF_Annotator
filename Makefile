@@ -19,11 +19,13 @@ ifeq ($(MOODLE_VERSION),4.0)
 	@echo "installing version 4.0 .. "
 else ifeq ($(MOODLE_VERSION),4.1)
 	@echo "installing version 4.1 .. "
+else ifeq ($(MOODLE_VERSION),4.2)
+	@echo "installing version 4.2 .. "
 else ifeq ($(MOODLE_VERSION),3.11)
 	@echo "installing version 3.11 ..."
 	$(eval TEMP_VERSION=4.0)
 else 
-	$(error only MOODLE_VERSION 3.11 - 4.1 are supported)
+	$(error only MOODLE_VERSION 3.11 - 4.2 are supported)
 endif
 
 build:

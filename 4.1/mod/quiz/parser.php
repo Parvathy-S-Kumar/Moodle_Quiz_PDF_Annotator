@@ -68,32 +68,24 @@ function parser_rectangle($arr)
 
 }
 
-
-
 //Parser for processing color format of fabricjs to fpdf
 function process_color($str) {
-    if ($str == "null")
-        $val = [null];
-    if ($str == "red")                 // converting string to rgb
-        $val = [255, 0, 0];
-    else if ($str == "green")
-        $val = [0, 255, 0];
-    else if($str == "blue")
-        $val = [0, 0, 255];
-    else if($str == "black")
+    if ($str == "null")    
         $val = [0, 0, 0];
-        else if($str == "yellow")
+    if ($str == "red" || $str == "rgba(255, 0, 0, 0.3)" || $str == "rgb(255, 0, 0)")                 
+        $val = [255, 0, 0];              // converting string to rgb
+    else if ($str == "green" || $str == "rgba(0, 255, 0, 0.3)" || $str == "rgb(0, 255, 0)")
+        $val = [0, 255, 0];
+    else if($str == "blue" || $str == "rgba(0, 0, 255, 0.3)" || $str == "rgb(0, 0, 255)")
+        $val = [0, 0, 255];
+    else if($str == "black" || $str == "rgba(0, 0, 0, 0.3)" || $str == "rgb(0, 0, 0)")
+        $val = [0, 0, 0];
+        else if($str == "yellow" || $str == "rgba(255, 255, 0, 0.3)" || $str == "rgb(255, 255, 0)")
         $val = [255, 255, 0];
     else {
         $val =array();
         list($r, $g, $b) = sscanf($str, "#%02x%02x%02x"); //hexadecimal format
         $val=[$r, $g, $b];
-        
-    if (preg_match('/rgb/', $str))         // if it is of the form rgb or rgba
-        {
-            $str = substr($str, 5,-1);
-            $val = explode(",", $str); 
-        }
     }
     return $val;
 }

@@ -68,6 +68,7 @@ restore:
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/test.php
 	@rm -rf ./../${MOODLE}/${MOD_QUIZ}/fpdi-fpdf
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/upload.php
+	@rm -f ./../${MOODLE}/${MOD_QUIZ}/alphapdf.php
 	@rm -f ./../${MOODLE}/${QUESTION_TYPE_ESSAY}/renderer.php
 	@echo "restoring files"
 	@cp -v -p ./backup/${MOD_QUIZ}/comment.php ./../${MOODLE}/${MOD_QUIZ}/  

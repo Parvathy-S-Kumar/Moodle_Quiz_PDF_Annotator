@@ -60,7 +60,7 @@ foreach ($files as $file) {
         $out = $qa->get_response_file_url($file);
         $url = (explode("?", $out))[0];     // remove ?forcedownload=1 from the end of the url
         $fileurl = $url;
-        $original_file = $file;             // storing it; in case the file is not PDF, we need the original file to create PDF from it
+        $originalFile = $file;             // storing it; in case the file is not PDF, we need the original file to create PDF from it
         break;
     }
 }
@@ -116,11 +116,11 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     // so we need to create PDF first and update fileurl to this PDF file
 
     // copy non-pdf file to the temp directory of moodledata
-    $original_file_path=$tempPath . "/" . $original_file->get_filename();
-    $original_file->copy_content_to($original_file_path);
+    $fileToConvert=$tempPath . "/" . $originalFile->get_filename();
+    $originalFile->copy_content_to($fileToConvert);
     
     // get the mime-type of the original file
-    $mime = mime_content_type($original_file->get_filename());
+    $mime = mime_content_type($originalFile->get_filename());
     $mime = (explode("/", $mime))[0];
 
     
@@ -129,15 +129,15 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     try
     {
         if($mime === "image")
-            $command = "convert " . $original_file_path ." " .$dummyFile;
+            $command = "convert " . $fileToConvert ." " .$dummyFile;
         else if($mime=="text")
         {
-            $command = "convert TEXT:" . $original_file_path ." " .$dummyFile;
+            $command = "convert TEXT:" . $fileToConvert ." " .$dummyFile;
         }
         else
         {
-            echo "<script>alert('Unsupported File Type. Unable to annotate');</script>";
             $canProceed=false;
+            throw new Exception("Unsupported File Type");
         }
     }
     catch(Exception $e)
@@ -148,10 +148,11 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
 
     if($canProceed == true)
     {
+        //Execute the commands of imagemagick(Convert texts and images to PDF)
         shell_exec($command);
 
-        // now delete that non-pdf file from current working directory; because we don't need it anymore
-        $command = "rm ./" . $original_file->get_filename();
+        // now delete that non-pdf file from tempPath; because we don't need it anymore
+        $command = "rm " . $fileToConvert;
         shell_exec($command);
 
         // create a PDF file in moodle database from the above created PDF file
@@ -183,7 +184,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
 }
 else
 {
-    $original_file->copy_content_to($dummyFile);
+    $originalFile->copy_content_to($dummyFile);
 }
 
 //Checking if dummyfile was successfully created

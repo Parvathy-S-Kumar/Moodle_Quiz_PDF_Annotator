@@ -77,7 +77,7 @@ $filearea = 'response_attachments';
 $filepath = '/';
 $itemid = $attemptobj->get_attemptid();
 
-$supported=1;
+$canProceed=true;
 // checking if file is not pdf
 $format = explode(".", $filename);
 $format = end($format);     //Changed
@@ -89,15 +89,8 @@ if($format !== 'pdf')
 }
 
 $fs = get_file_storage();
+
 // check if the annotated pdf exists or not in database
-
-$original_file->copy_content_to($dummyFile);
-if(!(file_exists($dummyFile)))
-{
-    $supported=0;
-    throw new Exception("Permission  Denied");
-}  //Changed
-
 $doesExists = $fs->file_exists($contextid, $component, $filearea, $itemid, $filepath, $filename);
 if($doesExists === true)   // if exists then update $fileurl to the url of this file
 {
@@ -144,7 +137,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
         else
         {
             echo "<script>alert('Unsupported File Type. Unable to annotate');</script>";
-            $supported=0;
+            $canProceed=false;
         }
     }
     catch(Exception $e)
@@ -153,7 +146,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     }
     //Updation ends
 
-    if($supported == 1)
+    if($canProceed == true)
     {
         shell_exec($command);
 
@@ -188,8 +181,19 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
         $fileurl = $url;                    // now update $fileurl
     }
 }
+else
+{
+    $original_file->copy_content_to($dummyFile);
+}
 
-if($supported == 1) //Changed
+//Checking if dummyfile was successfully created
+if(!(file_exists($dummyFile)))
+{
+    $canProceed=false;
+    throw new Exception("Permission  Denied");
+}  //Changed
+
+if($canProceed == true) //Changed
 {
     // include the html file; It has all the features of annotator
     include "./myindex.html";

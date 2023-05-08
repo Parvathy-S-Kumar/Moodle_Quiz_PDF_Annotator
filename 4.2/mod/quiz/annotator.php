@@ -27,6 +27,10 @@
 require_once('../../config.php');
 require_once('locallib.php');
 
+//The $tempPath is the path to the subdirectory EssayPDF created in moodle's temp directory 
+$tempPath = $CFG->tempdir ."/EssayPDF";
+$dummyFile= $tempPath ."/dummy.pdf";
+
 $attemptid = required_param('attempt', PARAM_INT);
 $slot = required_param('slot', PARAM_INT); // The question number in the attempt.
 $fileno = required_param('fileno', PARAM_INT);
@@ -87,8 +91,6 @@ if($format !== 'pdf')
 $fs = get_file_storage();
 // check if the annotated pdf exists or not in database
 
-$path = $CFG->tempdir ."/EssayPDF";
-$dummyFile= $path ."/dummy.pdf";
 $original_file->copy_content_to($dummyFile);
 if(!(file_exists($dummyFile)))
 {
@@ -121,7 +123,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     // so we need to create PDF first and update fileurl to this PDF file
 
     // copy non-pdf file to the temp directory of moodledata
-    $original_file_path=$path . "/" . $original_file->get_filename();
+    $original_file_path=$tempPath . "/" . $original_file->get_filename();
     $original_file->copy_content_to($original_file_path);
     
     // get the mime-type of the original file

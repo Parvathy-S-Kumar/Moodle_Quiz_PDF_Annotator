@@ -45,6 +45,9 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
     * MOODLE_DATA_DIR should be set to the path of moodledata directory.
     * Default MOODLE_VERSION is 4.0 and MOODLE_DATA_DIR is '/var/moodledata'
     
+3. To clear the cache
+    * `sudo php /var/www/html/moodle/admin/cli/purge_caches.php`
+    * It is an optional step, but it is better to do.
 
 __Note you might need to change the variable MOODLE in Makefile according to your folder name if you followed default settings while installing moodle then this is not needed but if you changed the name from moodle to something else then you need to update here the same.__   
 

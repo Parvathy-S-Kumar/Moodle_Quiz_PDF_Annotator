@@ -21,6 +21,8 @@
  * @package   mod_quiz
  * @copyright gustav delius 2006
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Changes made by Vishal Rao and Tausif Iqbal from line 115-162
+ * No changes made by Asha Jose and Parvathy S Kumar
  */
 
 require_once('../../config.php');
@@ -157,9 +159,9 @@ if($fileno > 0)
 // rendering questions
 echo $comment_form;
 echo $que_for_commenting;
-
+// Tausif Iqbal, Vishal Rao works end here...
 ?>
-<!-- Tausif Iqbal, Vishal Rao works end here... -->
+
 <div>
     <input type="hidden" name="attempt" value="<?php echo $attemptobj->get_attemptid(); ?>" />
     <input type="hidden" name="slot" value="<?php echo $slot; ?>" />

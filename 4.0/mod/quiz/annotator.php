@@ -115,6 +115,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     // annotated PDF doesn't exists and the original file is not a PDF file
     // so we need to create PDF first and update fileurl to this PDF file
 
+    //Changes made by Asha & Parvathy begins
     // copy non-pdf file to the temp directory of moodledata
     $fileToConvert=$tempPath . "/" . $originalFile->get_filename();
     $originalFile->copy_content_to($fileToConvert);
@@ -123,8 +124,6 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     $mime = mime_content_type($originalFile->get_filename());
     $mime = (explode("/", $mime))[0];
 
-    
-    //Updated
     // convert that file into PDF, based on mime type (NOTE: this will be created in the cwd)
     try
     {
@@ -144,7 +143,6 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     {
         echo 'Message: ' .$e->getMessage();
     }
-    //Updation ends
 
     if($canProceed == true)
     {
@@ -182,23 +180,25 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
         $fileurl = $url;                    // now update $fileurl
     }
 }
-else
+else   
 {
     $originalFile->copy_content_to($dummyFile);
-}
+} 
 
 //Checking if dummyfile was successfully created
 if(!(file_exists($dummyFile)))
 {
     $canProceed=false;
     throw new Exception("Permission  Denied");
-}  //Changed
+}  
 
-if($canProceed == true) //Changed
+if($canProceed == true) 
 {
     // include the html file; It has all the features of annotator
     include "./myindex.html";
 }
+//Changes made by Asha & Parvathy ends
+
 ?>
 <!-- assigning php variable to javascript variable so that
      we can use these in javascript file

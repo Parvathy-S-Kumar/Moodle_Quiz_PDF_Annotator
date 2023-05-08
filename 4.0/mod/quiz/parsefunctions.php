@@ -40,7 +40,7 @@ function draw_rect($arr,$pdf)
 {
     $list = parser_rectangle($arr);
     $fill = process_color($list[4]);
-    $pdf->SetFillColor($fill[0],$fill[1],$fill[2]);
+    $pdf->SetFillColor($fill[0],$fill[1],$fill[2]); // r g b
     $pdf->SetAlpha(0.20);                     // for highlighting
     $pdf->Rect($list[0],                      // x
     $list[1],                                 // y

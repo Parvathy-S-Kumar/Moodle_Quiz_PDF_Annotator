@@ -14,6 +14,47 @@ define("OPACITY",0.20);
 define("FULLOPACITY",1);
 define("FONTRATIO",1.6);
 
+
+function build_annotated_file($file,$json)
+{
+    //Get the page orientation
+    $orientation=$json["page_setup"]['orientation'];
+    $orientation=($orientation=="portrait")? 'p' : 'l';
+
+    $pdf = new AlphaPDF($orientation); 
+    $pagecount = $pdf->setSourceFile($file);
+    //Take the pages of PDF one-by-one and annotate them
+    for($i=1 ; $i <= $pagecount; $i++)
+    {
+        $tpl = $pdf->importPage($i); 
+        $size = $pdf->getTemplateSize($tpl); 
+        $pdf->addPage(); 
+        $pdf->useTemplate($tpl, 1, 1, $size['width'], $size['height'], FALSE); 
+        if(count((array)$json["pages"][$i-1]) ==0)
+            continue;
+        $objnum=count((array)$json["pages"][$i-1][0]["objects"]);
+        for($j=0;$j<$objnum;$j++)
+        {
+            $arr = $json["pages"][$i-1][0]["objects"][$j];
+            if($arr["type"]=="path")
+            {
+            draw_path($arr,$pdf);
+            }
+            else if($arr["type"]=="i-text")
+            {
+                insert_text($arr,$pdf);
+            }
+            else if($arr["type"]=="rect")
+            {
+                draw_rect($arr,$pdf);
+            }
+        }
+    } 
+
+    return $pdf;
+}
+
+
 // Function to draw free hand drawing
 function draw_path($arr, $pdf) 
 {

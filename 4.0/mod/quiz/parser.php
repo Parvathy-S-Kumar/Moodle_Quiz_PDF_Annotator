@@ -2,7 +2,6 @@
 /**
  * @author Asha Jose, Parvathy S
  * This page contains functions for parsing
- * 
  * The data from serialiser of fabricjs is read and processed.
  * The processed data is then stored in utiliszable manner for fpdf
  */

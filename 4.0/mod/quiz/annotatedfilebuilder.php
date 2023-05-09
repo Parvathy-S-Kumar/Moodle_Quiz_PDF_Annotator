@@ -8,37 +8,46 @@
  */
 
 
-define("BRUSHSIZE",0.60);
 define("FONTTYPE",'Times');
 define("OPACITY",0.20);
 define("FULLOPACITY",1);
 define("FONTRATIO",1.6);
+define("XOFFSET",1);
+define("YOFFSET",1);
+define("ADJUSTPAGESIZE",FALSE);
 
-
+/*Takes file to annotate and the annotation data passed from upload.php 
+and returns the annotated PDF File Object */
 function build_annotated_file($file,$json)
 {
     //Get the page orientation
     $orientation=$json["page_setup"]['orientation'];
     $orientation=($orientation=="portrait")? 'p' : 'l';
 
+    //FPDI class defined in alphapdf.php
     $pdf = new AlphaPDF($orientation); 
     $pagecount = $pdf->setSourceFile($file);
     //Take the pages of PDF one-by-one and annotate them
     for($i=1 ; $i <= $pagecount; $i++)
     {
-        $tpl = $pdf->importPage($i); 
-        $size = $pdf->getTemplateSize($tpl); 
+        //Functions from FPDI
+        $template = $pdf->importPage($i); 
+        $size = $pdf->getTemplateSize($template); 
         $pdf->addPage(); 
-        $pdf->useTemplate($tpl, 1, 1, $size['width'], $size['height'], FALSE); 
-        if(count((array)$json["pages"][$i-1]) ==0)
+        $pdf->useTemplate($template, XOFFSET, YOFFSET, $size['width'], $size['height'], ADJUSTPAGESIZE); 
+        $currPage=$json["pages"][$i-1];
+
+        if(count((array)$currPage) ==0) //To check whether the current page has no annotations
             continue;
-        $objnum=count((array)$json["pages"][$i-1][0]["objects"]);
+        //Number of objects in the current page
+        $objnum=count((array)$currPage[0]["objects"]);
+
         for($j=0;$j<$objnum;$j++)
         {
-            $arr = $json["pages"][$i-1][0]["objects"][$j];
+            $arr = $currPage[0]["objects"][$j];
             if($arr["type"]=="path")
             {
-            draw_path($arr,$pdf);
+                draw_path($arr,$pdf);
             }
             else if($arr["type"]=="i-text")
             {
@@ -61,7 +70,6 @@ function draw_path($arr, $pdf)
     $list = parser_path($arr);
     $stroke = process_color(end($list));
     $pdf->SetDrawColor($stroke[0], $stroke[1], $stroke[2]);   // r g b of stroke color
-    $pdf->SetLineWidth(BRUSHSIZE);
     for($k = 0; $k < sizeof($list) - 2; $k++) {
         $pdf->Line($list[$k][0],                      // x1
         $list[$k][1],                                 // y1

@@ -51,7 +51,7 @@ generate:
 	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/mystyles.css  ./../${MOODLE}/${MOD_QUIZ}/
 	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/upload.php  ./../${MOODLE}/${MOD_QUIZ}/
 	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/parser.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/parsefunctions.php  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/annotatedfilebuilder.php  ./../${MOODLE}/${MOD_QUIZ}/
 	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/alphapdf.php  ./../${MOODLE}/${MOD_QUIZ}/
 	@cp -r -p ./${TEMP_VERSION}/${MOD_QUIZ}/fpdi-fpdf  ./../${MOODLE}/${MOD_QUIZ}/
 	@cp -v -p ./${TEMP_VERSION}/${QUESTION_TYPE_ESSAY}/renderer.php  ./../${MOODLE}/${QUESTION_TYPE_ESSAY}/
@@ -66,7 +66,7 @@ restore:
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/mypdfannotate.js
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/myscript.js 
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/mystyles.css
-	@rm -f ./../${MOODLE}/${MOD_QUIZ}/parsefunctions.php
+	@rm -f ./../${MOODLE}/${MOD_QUIZ}/annotatedfilebuilder.php
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/test.php
 	@rm -rf ./../${MOODLE}/${MOD_QUIZ}/fpdi-fpdf
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/upload.php

@@ -20,6 +20,35 @@ require __DIR__ . '/parsefunctions.php';
 require __DIR__ . '/parser.php';
 require __DIR__ . '/alphapdf.php';
 
+//To convert PDF versions to 1.4 if the version is above it since FPDI parser will only work for PDF versions upto 1.4
+function convert_pdf_version($file, $path)
+{
+    $filepdf = fopen($file,"r");
+    if ($filepdf) 
+    {
+        $line_first = fgets($filepdf);
+        preg_match_all('!\d+!', $line_first, $matches);	
+        // save that number in a variable
+        $pdfversion = implode('.', $matches[0]);
+        if($pdfversion > "1.4")
+        {
+            $srcfile_new=$path."/newdummy.pdf";
+            $srcfile=$file;
+            //Using GhostScript convert the pdf version to 1.4
+            $shellOutput = shell_exec('gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE \
+            -dBATCH -sOutputFile="'.$srcfile_new.'" "'.$srcfile.'"'); 
+            if(is_null($shellOutput))
+            {
+                throw new Exception("PDF conversion using GhostScript failed");
+            }
+            $file=$srcfile_new;
+            unlink($srcfile);          // to remove original dummy.pdf
+        }   
+        fclose($filepdf);
+    }
+
+    return $file;
+}
 
 //Getting all the data from mypdfannotate.js
 $value = $_POST['id'];
@@ -44,85 +73,30 @@ $fileinfo = array(
 //Get the serialisepdf value contents and convert into php arrays
 $json = json_decode($value,true);
 
-//Get the page orientation
-$orientation=$json["page_setup"]['orientation'];
-$orientation=($orientation=="portrait")? 'p' : 'l';
-
 //Referencing the file from the temp directory 
 $path= $CFG->tempdir . '/EssayPDF';
 $file = $path . '/dummy.pdf'; 
+$tempfile= $path . '/outputmoodle.pdf';
 
-//To convert PDF versions to 1.4 if the version is above it since FPDI parser will only work for PDF versions upto 1.4
-$filepdf = fopen($file,"r");
-if ($filepdf) 
-{
-    $line_first = fgets($filepdf);
-    preg_match_all('!\d+!', $line_first, $matches);	
-    // save that number in a variable
-    $pdfversion = implode('.', $matches[0]);
-    try
-    {
-        if($pdfversion > "1.4")
-        {
-            $srcfile_new=$path."/newdummy.pdf";
-            $srcfile=$file;
-            shell_exec('gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE \
-            -dBATCH -sOutputFile="'.$srcfile_new.'" "'.$srcfile.'"'); 
-            $file=$srcfile_new;
-            unlink($srcfile);          // to remove original dummy.pdf
-        }
-    }
-    catch (Exception $e)
-    {
-        echo 'Message: ' .$e->getMessage();
-    }
-    
-fclose($filepdf);
-}
-
-//Using FPDF and FPDI to annotate
-$pdf = new AlphaPDF($orientation); 
 if(file_exists($file))
-    $pagecount = $pdf->setSourceFile($file); 
-else
-    die('\nSource PDF not found!'); 
-
-// Deleting dummy.pdf
-unlink($file);
-
-//Take the pages of PDF one-by-one and annotate them
-for($i=1 ; $i <= $pagecount; $i++)
 {
-    $tpl = $pdf->importPage($i); 
-    $size = $pdf->getTemplateSize($tpl); 
-    $pdf->addPage(); 
-    $pdf->useTemplate($tpl, 1, 1, $size['width'], $size['height'], FALSE); 
-    if(count((array)$json["pages"][$i-1]) ==0)
-        continue;
-    $objnum=count((array)$json["pages"][$i-1][0]["objects"]);
-    for($j=0;$j<$objnum;$j++)
+    //Calling function to convert the PDF version above 1.4 to 1.4 for compatibility with fpdf
+    $file=convert_pdf_version($file, $path);
+
+    //Using FPDF and FPDI to annotate
+    if(file_exists($file))
     {
-        $arr = $json["pages"][$i-1][0]["objects"][$j];
-        if($arr["type"]=="path")
-        {
-           draw_path($arr,$pdf);
-        }
-        else if($arr["type"]=="i-text")
-        {
-            insert_text($arr,$pdf);
-        }
-        else if($arr["type"]=="rect")
-        {
-            draw_rect($arr,$pdf);
-        }
+        $pdf=build_annotated_file($file,$json);
+        // Deleting dummy.pdf
+        unlink($file);
+        // creating output moodle file for loading into database
+        $pdf->Output('F', $tempfile);
     }
+    else
+        throw new Exception('\nPDF Version incompatible'); 
 }
-
-// creating output moodle file for loading into database
-$pdf->Output('F', $path . '/outputmoodle.pdf');
-
-$fname='outputmoodle.pdf';
-$temppath = $path . '/' . $fname;
+else
+    throw new Exception('\nSource PDF not found!'); 
 
 //Untouched 
 $fs = get_file_storage();
@@ -143,10 +117,9 @@ if($doesExists === true)
     $storedfile->delete();
 }
 // finally save the file (creating a new file)
-$fs->create_file_from_pathname($fileinfo, $temppath);
+$fs->create_file_from_pathname($fileinfo, $tempfile);
 //Untouched portion ends
 
 // Deleting outputmoodle.pdf
-unlink($temppath);  
+unlink($tempfile);  
 ?>
-

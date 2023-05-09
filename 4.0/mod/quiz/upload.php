@@ -76,7 +76,7 @@ $json = json_decode($value,true);
 //Referencing the file from the temp directory 
 $path= $CFG->tempdir . '/EssayPDF';
 $file = $path . '/dummy.pdf'; 
-
+$tempfile= $path . '/outputmoodle.pdf';
 
 if(file_exists($file))
 {
@@ -90,16 +90,13 @@ if(file_exists($file))
         // Deleting dummy.pdf
         unlink($file);
         // creating output moodle file for loading into database
-        $pdf->Output('F', $path . '/outputmoodle.pdf');
+        $pdf->Output('F', $tempfile);
     }
     else
         throw new Exception('\nPDF Version incompatible'); 
 }
 else
     throw new Exception('\nSource PDF not found!'); 
-
-$fname='/outputmoodle.pdf';
-$temppath = $path . '/' . $fname;
 
 //Untouched 
 $fs = get_file_storage();
@@ -120,10 +117,10 @@ if($doesExists === true)
     $storedfile->delete();
 }
 // finally save the file (creating a new file)
-$fs->create_file_from_pathname($fileinfo, $temppath);
+$fs->create_file_from_pathname($fileinfo, $tempfile);
 //Untouched portion ends
 
 // Deleting outputmoodle.pdf
-unlink($temppath);  
+unlink($tempfile);  
 ?>
 

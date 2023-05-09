@@ -234,14 +234,6 @@ PDFAnnotate.prototype.serializePdf = function (callback) {
 		}
 	  });
 	});
-	var data = {
-	  page_setup: {
-		format: inst.format,
-		orientation: inst.orientation,
-	  },
-	  pages: pageAnnotations,
-	};
-	
   };
 //Updation ends
 

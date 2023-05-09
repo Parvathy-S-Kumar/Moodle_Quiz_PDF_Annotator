@@ -5,7 +5,7 @@
 
  /**
  * @updatedby Asha Jose and Parvathy S Kumar
- * SerializePDF and SavePDF functions are modified by us. 
+ * SerializePDF and SavePDF functions are modified. 
  */
 
 var PDFAnnotate = function(container_id, url, options = {}) {
@@ -138,7 +138,8 @@ PDFAnnotate.prototype.enablePencil = function () {
 	inst.active_tool = 1;
 	if (inst.fabricObjects.length > 0) {
 	    $.each(inst.fabricObjects, function (index, fabricObj) {
-	        fabricObj.isDrawingMode = true;
+	        fabricObj.freeDrawingBrush.width=2;	//Changed default brush size
+			fabricObj.isDrawingMode = true;
 	    });
 	}
 	return false;  // changes made

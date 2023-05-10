@@ -1,7 +1,10 @@
 <?php
 /**
- * This file is for setting transparency for color
- * no changed made from the original extracted file
+ * @author: Martin Hall-May
+ * License: FPDF
+ * Description : This script gives transparency support. You can set the alpha channel from 0 (fully transparent) to 1 (fully opaque). It applies to all elements (text, drawings, images).
+ * Link : http://www.fpdf.org/en/script/script74.php
+ * Changes were made by Asha Jose and Parvathy S Kumar in lines 10-14
  */
 
 include 'fpdi-fpdf/fpdf/fpdf.php';

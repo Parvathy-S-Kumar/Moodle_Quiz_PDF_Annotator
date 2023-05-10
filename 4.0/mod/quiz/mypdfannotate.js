@@ -166,6 +166,7 @@ PDFAnnotate.prototype.enableRectangle = function () {
 		});
 	}
 
+	//Updated by Vishal Rao and Tausif Iqbal
 	var rect = new fabric.Rect({
 		width: 100,
 		height: 100,

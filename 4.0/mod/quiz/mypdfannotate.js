@@ -24,6 +24,7 @@ var PDFAnnotate = function(container_id, url, options = {}) {
 	this.pageImageCompression = options.pageImageCompression
     ? options.pageImageCompression.toUpperCase()
     : "NONE";
+	this.textBoxText = 'Edit Text';
 	this.format;
 	this.orientation;
 	var inst = this;
@@ -106,21 +107,34 @@ var PDFAnnotate = function(container_id, url, options = {}) {
 		});
 	}
 
-	this.fabricClickHandler = function(event, fabricObj) {
+	this.fabricClickHandler = function (event, fabricObj) {
 		var inst = this;
-	    if (inst.active_tool == 2) {
-	        var text = new fabric.IText('Sample text', {
-	            left: event.clientX - fabricObj.upperCanvasEl.getBoundingClientRect().left,
-	            top: event.clientY - fabricObj.upperCanvasEl.getBoundingClientRect().top,
-	            fill: inst.color,
-	            fontSize: inst.font_size,
-	            selectable: true
-	        });
-	        fabricObj.add(text);
-	        inst.active_tool = 0;
-	    }
-	}
-}
+		var toolObj;
+		if (inst.active_tool == 2) {
+		  toolObj = new fabric.IText(inst.textBoxText, {
+			left: event.clientX - fabricObj.upperCanvasEl.getBoundingClientRect().left,
+			top: event.clientY - fabricObj.upperCanvasEl.getBoundingClientRect().top,
+			fill: inst.color,
+			fontSize: inst.font_size,
+			selectable: true,
+		  });
+		} else if (inst.active_tool == 4) {
+		  toolObj = new fabric.Rect({
+			left: event.clientX - fabricObj.upperCanvasEl.getBoundingClientRect().left,
+			top: event.clientY - fabricObj.upperCanvasEl.getBoundingClientRect().top,
+			width: 100,
+			height: 100,
+			fill: inst.color,
+			stroke: '#4Dff0000',
+			strokeSize: inst.borderSize,
+		  });
+		}
+	
+		if (toolObj) {
+		  fabricObj.add(toolObj);
+		}
+	};
+};
 
 PDFAnnotate.prototype.enableSelector = function () {
 	var inst = this;
@@ -130,7 +144,7 @@ PDFAnnotate.prototype.enableSelector = function () {
 	        fabricObj.isDrawingMode = false;
 	    });
 	}
-	return false;  // changes made
+	  
 }
 
 PDFAnnotate.prototype.enablePencil = function () {
@@ -142,7 +156,7 @@ PDFAnnotate.prototype.enablePencil = function () {
 			fabricObj.isDrawingMode = true;
 	    });
 	}
-	return false;  // changes made
+	  
 }
 
 PDFAnnotate.prototype.enableAddText = function () {
@@ -153,7 +167,7 @@ PDFAnnotate.prototype.enableAddText = function () {
 	        fabricObj.isDrawingMode = false;
 	    });
 	}
-	return false;  // changes made
+	  
 }
 
 PDFAnnotate.prototype.enableRectangle = function () {
@@ -165,17 +179,6 @@ PDFAnnotate.prototype.enableRectangle = function () {
 			fabricObj.isDrawingMode = false;
 		});
 	}
-
-	//Updated by Vishal Rao and Tausif Iqbal
-	var rect = new fabric.Rect({
-		width: 100,
-		height: 100,
-		fill: inst.color,
-		stroke: '#4Dff0000',
-		strokeSize: inst.borderSize
-	});
-	fabricObj.add(rect);
-	return false;
 }
 
 PDFAnnotate.prototype.deleteSelectedObject = function () {
@@ -185,11 +188,10 @@ PDFAnnotate.prototype.deleteSelectedObject = function () {
 	{
 	    if (confirm('Are you sure ?')) inst.fabricObjects[inst.active_canvas].remove(activeObject);
 	}
-	return false;
 }
 
 //Updated by Asha Jose and Parvathy S Kumar
-  PDFAnnotate.prototype.savePdf = function (fileName) {
+  PDFAnnotate.prototype.savePdf = function () {
     pdf.serializePdf(function (string) {
       var value = JSON.stringify(JSON.parse(string), null, 4);
 	  var xmlhttp = new XMLHttpRequest();
@@ -245,16 +247,13 @@ PDFAnnotate.prototype.setColor = function (color) {
 	$.each(inst.fabricObjects, function (index, fabricObj) {
         fabricObj.freeDrawingBrush.color = color;
     });
-	return false;
 }
 
 PDFAnnotate.prototype.setBorderColor = function (color) {
 	var inst = this;
 	inst.borderColor = color;
-	return false;
 }
 
 PDFAnnotate.prototype.setFontSize = function (size) {
 	this.font_size = size;
-	return false;
 }

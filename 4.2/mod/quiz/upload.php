@@ -16,7 +16,7 @@
 
 require_once('../../config.php');
 require_once('locallib.php');
-require __DIR__ . '/parsefunctions.php';
+require __DIR__ . '/annotatedfilebuilder.php';
 require __DIR__ . '/parser.php';
 require __DIR__ . '/alphapdf.php';
 

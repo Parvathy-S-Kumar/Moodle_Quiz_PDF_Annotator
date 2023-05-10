@@ -7,7 +7,7 @@
  * Depending on the data, different objects can be drawn on top of a pdf using these functions.
  */
 
-
+define("BRUSHSIZE",0.50);
 define("FONTTYPE",'Times');
 define("OPACITY",0.20);
 define("FULLOPACITY",1);
@@ -70,6 +70,7 @@ function draw_path($arr, $pdf)
     $list = parser_path($arr);
     $stroke = process_color(end($list));
     $pdf->SetDrawColor($stroke[0], $stroke[1], $stroke[2]);   // r g b of stroke color
+    $pdf->SetLineWidth(BRUSHSIZE);
     for($k = 0; $k < sizeof($list) - 2; $k++) {
         $pdf->Line($list[$k][0],                      // x1
         $list[$k][1],                                 // y1

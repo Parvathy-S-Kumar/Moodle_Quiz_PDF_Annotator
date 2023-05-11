@@ -1,7 +1,8 @@
 /**
  * @updatedby Tausif Iqbal and Vishal Rao
- * No changes made by Asha Jose and Parvathy S Kumar
+ * Changes were made by Asha Jose and Parvathy S Kumar
  */
+
 // fileurl has been assigned its correct value in comment.php file
 var pdf = new PDFAnnotate("pdf-container", fileurl, {
     onPageUpdated(page, oldData, newData) {
@@ -21,46 +22,38 @@ var pdf = new PDFAnnotate("pdf-container", fileurl, {
   }
   
   function enableSelector(event) {
-      event.preventDefault();    // changes made
+      event.preventDefault();    
       changeActiveTool(event);
-      pdf.enableSelector();
-      return false;    // changes made
+      pdf.enableSelector();    
   }
   
   function enablePencil(event) {
-      event.preventDefault();    // changes made
+      event.preventDefault();    
       changeActiveTool(event);
-      pdf.enablePencil();
-      return false;    // changes made
+      pdf.enablePencil();    
   }
   
   function enableAddText(event) {
-      event.preventDefault();    // changes made
+      event.preventDefault();    
       changeActiveTool(event);
-      pdf.enableAddText();
-      return false;    // changes made
+      pdf.enableAddText();    
   }
   
 
   function enableRectangle(event) {
       event.preventDefault();
       changeActiveTool(event);
-      pdf.setColor('rgba(255, 0, 0, 0.3)');
-      pdf.setBorderColor('blue');
-      pdf.enableRectangle();
-      return false;    // changes made
+      pdf.enableRectangle();    
   }
   
   function deleteSelectedObject(event) {
       event.preventDefault();
-      pdf.deleteSelectedObject();
-      return false;    // changes made
+      pdf.deleteSelectedObject();   
   }
   
   function savePDF(event) {
-      event.preventDefault();    // changes made
-      pdf.savePdf('sample.pdf'); // save with given file name
-      return false;    // changes made
+      event.preventDefault();    
+      pdf.savePdf();        //Changes made by Asha and Parvathy: Removed a parameter of the function
   }
   
   $(function () {
@@ -69,7 +62,6 @@ var pdf = new PDFAnnotate("pdf-container", fileurl, {
           $(this).addClass('active');
           color = $(this).get(0).style.backgroundColor;
           pdf.setColor(color);
-          return false;
       });
   
       $('#font-size').change(function () {

@@ -43,7 +43,6 @@ var pdf = new PDFAnnotate("pdf-container", fileurl, {
   function enableRectangle(event) {
       event.preventDefault();
       changeActiveTool(event);
-      pdf.setColor('rgba(255, 0, 0, 0.3)');
       pdf.enableRectangle();    
   }
   

@@ -8,14 +8,14 @@
  * SerializePDF and SavePDF functions are modified. 
  */
 
-var PDFAnnotate = function(container_id, url, options = {}) {
+ var PDFAnnotate = function(container_id, url, options = {}) {
 	this.number_of_pages = 0;
 	this.pages_rendered = 0;
 	this.active_tool = 1; // 1 - Free hand, 2 - Text, 3 - Arrow, 4 - Rectangle
 	this.fabricObjects = [];
 	this.fabricObjectsData = [];
-	this.color = '#000000';
-	this.borderColor = '#000000';
+	this.color = 'rgb(0,0,0)';
+	this.borderColor = 'rgb(0,0,0)';
 	this.borderSize = 1;
 	this.font_size = 16;
 	this.active_canvas = 0;
@@ -109,6 +109,7 @@ var PDFAnnotate = function(container_id, url, options = {}) {
 
 	this.fabricClickHandler = function (event, fabricObj) {
 		var inst = this;
+		var activeObject = inst.fabricObjects[inst.active_canvas].getActiveObject();
 		var toolObj;
 		if (inst.active_tool == 2) {
 		  toolObj = new fabric.IText(inst.textBoxText, {
@@ -116,7 +117,9 @@ var PDFAnnotate = function(container_id, url, options = {}) {
 			top: event.clientY - fabricObj.upperCanvasEl.getBoundingClientRect().top,
 			fill: inst.color,
 			fontSize: inst.font_size,
-			selectable: true,
+			lockRotation: true,
+			lockScalingX: true,
+			lockScalingY: true
 		  });
 		} else if (inst.active_tool == 4) {
 		  toolObj = new fabric.Rect({
@@ -125,11 +128,23 @@ var PDFAnnotate = function(container_id, url, options = {}) {
 			width: 100,
 			height: 100,
 			fill: inst.color,
-			stroke: '#4Dff0000',
-			strokeSize: inst.borderSize,
+			opacity: 0.2,
+			lockRotation: true
 		  });
 		}
-	
+		else if(inst.active_tool== 0) {
+		  if(activeObject) {
+			if(activeObject.get('type')== 'path') {
+			  activeObject.set({
+				lockScalingX: true,
+				lockScalingY: true,
+				lockRotation: true,
+				lockMovementX: true,
+				lockMovementY: true});
+			}
+		}
+	  }
+		inst.active_tool = 0;
 		if (toolObj) {
 		  fabricObj.add(toolObj);
 		}
@@ -144,7 +159,8 @@ PDFAnnotate.prototype.enableSelector = function () {
 	        fabricObj.isDrawingMode = false;
 	    });
 	}
-	  
+               
+
 }
 
 PDFAnnotate.prototype.enablePencil = function () {

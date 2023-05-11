@@ -2,7 +2,6 @@
 /**
  * @author Asha Jose, Parvathy S
  * This page contains functions for parsing
- * 
  * The data from serialiser of fabricjs is read and processed.
  * The processed data is then stored in utiliszable manner for fpdf
  */
@@ -68,16 +67,18 @@ function parser_rectangle($arr)
 
 }
 
+
+
 //Parser for processing color format of fabricjs to fpdf
 function process_color($str) {
     if ($str == "null")    
         $val = [0, 0, 0];
-    if ($str == "red" || $str == "rgba(255, 0, 0, 0.3)" || $str == "rgb(255, 0, 0)")                 
-        $val = [255, 0, 0];              // converting string to rgb
-    else if ($str == "green" || $str == "rgba(0, 255, 0, 0.3)" || $str == "rgb(0, 255, 0)")
-        $val = [0, 255, 0];
-    else if($str == "blue" || $str == "rgba(0, 0, 255, 0.3)" || $str == "rgb(0, 0, 255)")
-        $val = [0, 0, 255];
+    if ($str == "red" || $str == "rgba(251, 17, 17, 0.3)" || $str == "rgb(251, 17, 17)")                 
+        $val = [251, 17, 17];              // converting string to rgb
+    else if ($str == "green" || $str == "rgba(13, 93, 13, 0.3)" || $str == "rgb(13, 93, 13)")
+        $val = [13, 93, 13];
+    else if($str == "blue" || $str == "rgba(2, 2, 182, 0.3)" || $str == "rgb(2, 2, 182)")
+        $val = [2, 2, 182];
     else if($str == "black" || $str == "rgba(0, 0, 0, 0.3)" || $str == "rgb(0, 0, 0)")
         $val = [0, 0, 0];
         else if($str == "yellow" || $str == "rgba(255, 255, 0, 0.3)" || $str == "rgb(255, 255, 0)")

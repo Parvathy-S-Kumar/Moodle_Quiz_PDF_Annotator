@@ -141,6 +141,12 @@
 				lockRotation: true});
 			}
 		}
+		if (inst.active_tool == 2 || inst.active_tool == 4) {
+		      var element = document.querySelector("#select");
+		      $(".tool-button.active").removeClass("active");
+		      $(element).addClass("active");
+		}
+		
 	  }
 		inst.active_tool = 0;
 		if (toolObj) {

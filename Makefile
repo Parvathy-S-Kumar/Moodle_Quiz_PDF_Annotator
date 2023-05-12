@@ -2,10 +2,12 @@
 
 MOODLE="moodle"
 MOD_QUIZ="mod/quiz"
-MOODLE_VERSION=4.0
+MOODLE_VERSION=4.1
 QUESTION_TYPE_ESSAY="question/type/essay"
-TEMP_VERSION=4.0
+TEMP_VERSION=4.1
 MOODLE_DATA_DIR="/var/moodledata"
+SRC="src"
+COMMON_DIR="common"
 
 all: quiz_annotator 
 
@@ -42,19 +44,19 @@ backup:
 
 generate:
 	@echo "Copying php files..."
-	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/comment.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/annotator.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/myindex.html  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/mypdfannotate.css  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/mypdfannotate.js  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/myscript.js    ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/mystyles.css  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/upload.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/parser.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/annotatedfilebuilder.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${TEMP_VERSION}/${MOD_QUIZ}/alphapdf.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -r -p ./${TEMP_VERSION}/${MOD_QUIZ}/fpdi-fpdf  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${TEMP_VERSION}/${QUESTION_TYPE_ESSAY}/renderer.php  ./../${MOODLE}/${QUESTION_TYPE_ESSAY}/
+	@cp -v -p ./${SRC}/${TEMP_VERSION}/${MOD_QUIZ}/comment.php  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${TEMP_VERSION}/${QUESTION_TYPE_ESSAY}/renderer.php  ./../${MOODLE}/${QUESTION_TYPE_ESSAY}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/annotator.php  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/myindex.html  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/mypdfannotate.css  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/mypdfannotate.js  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/myscript.js    ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/mystyles.css  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/upload.php  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/parser.php  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/annotatedfilebuilder.php  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/alphapdf.php  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -r -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/fpdi-fpdf  ./../${MOODLE}/${MOD_QUIZ}/
 	@echo "copying done"
 
 

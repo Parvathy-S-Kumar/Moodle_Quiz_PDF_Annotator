@@ -47,11 +47,11 @@ generate:
 	@cp -v -p ./${SRC}/${TEMP_VERSION}/${MOD_QUIZ}/comment.php  ./../${MOODLE}/${MOD_QUIZ}/
 	@cp -v -p ./${SRC}/${TEMP_VERSION}/${QUESTION_TYPE_ESSAY}/renderer.php  ./../${MOODLE}/${QUESTION_TYPE_ESSAY}/
 	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/annotator.php  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/myindex.html  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/mypdfannotate.css  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/mypdfannotate.js  ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/myscript.js    ./../${MOODLE}/${MOD_QUIZ}/
-	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/mystyles.css  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/index.html  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/pdfannotate.css  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/pdfannotate.js  ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/clickhandlers.js    ./../${MOODLE}/${MOD_QUIZ}/
+	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/styles.css  ./../${MOODLE}/${MOD_QUIZ}/
 	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/upload.php  ./../${MOODLE}/${MOD_QUIZ}/
 	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/parser.php  ./../${MOODLE}/${MOD_QUIZ}/
 	@cp -v -p ./${SRC}/${COMMON_DIR}/${MOD_QUIZ}/annotatedfilebuilder.php  ./../${MOODLE}/${MOD_QUIZ}/
@@ -63,13 +63,13 @@ generate:
 restore:
 	@echo "removing php files"
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/annotator.php
-	@rm -f ./../${MOODLE}/${MOD_QUIZ}/myindex.html
-	@rm -f ./../${MOODLE}/${MOD_QUIZ}/mypdfannotate.css
-	@rm -f ./../${MOODLE}/${MOD_QUIZ}/mypdfannotate.js
-	@rm -f ./../${MOODLE}/${MOD_QUIZ}/myscript.js 
-	@rm -f ./../${MOODLE}/${MOD_QUIZ}/mystyles.css
+	@rm -f ./../${MOODLE}/${MOD_QUIZ}/index.html
+	@rm -f ./../${MOODLE}/${MOD_QUIZ}/pdfannotate.css
+	@rm -f ./../${MOODLE}/${MOD_QUIZ}/pdfannotate.js
+	@rm -f ./../${MOODLE}/${MOD_QUIZ}/clickhandlers.js 
+	@rm -f ./../${MOODLE}/${MOD_QUIZ}/styles.css
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/annotatedfilebuilder.php
-	@rm -f ./../${MOODLE}/${MOD_QUIZ}/test.php
+	@rm -f ./../${MOODLE}/${MOD_QUIZ}/parser.php
 	@rm -rf ./../${MOODLE}/${MOD_QUIZ}/fpdi-fpdf
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/upload.php
 	@rm -f ./../${MOODLE}/${MOD_QUIZ}/alphapdf.php

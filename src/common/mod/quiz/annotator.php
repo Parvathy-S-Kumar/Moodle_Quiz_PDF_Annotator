@@ -195,7 +195,7 @@ if(!(file_exists($dummyFile)))
 if($canProceed == true) 
 {
     // include the html file; It has all the features of annotator
-    include "./myindex.html";
+    include "./index.html";
 }
 //Changes made by Asha & Parvathy ends
 

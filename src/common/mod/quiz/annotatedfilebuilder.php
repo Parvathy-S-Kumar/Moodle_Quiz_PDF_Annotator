@@ -9,7 +9,7 @@
 
 define("BRUSHSIZE",0.50);
 define("FONTTYPE",'Times');
-define("OPACITY",0.20);
+define("OPACITY",0.30);
 define("FULLOPACITY",1);
 define("FONTRATIO",1.6);
 define("XOFFSET",1);

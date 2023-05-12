@@ -2,11 +2,11 @@
 ### new files/folder added in directory /mod/quiz/
 1. annotator.php
 2. upload.php 
-3. myindex.html
-4. mypdfannotate.js
-5. mypdfannotate.css
-6. myscript.js
-7. mystyles.css
+3. index.html
+4. pdfannotate.js
+5. pdfannotate.css
+6. clickhandlers.js
+7. styles.css
 8. parser.php
 9. test.php
 10. alphapdf.php

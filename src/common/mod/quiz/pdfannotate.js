@@ -129,10 +129,10 @@
 		  toolObj = new fabric.Rect({
 			left: event.clientX - fabricObj.upperCanvasEl.getBoundingClientRect().left,
 			top: event.clientY - fabricObj.upperCanvasEl.getBoundingClientRect().top,
-			width: highlightBoxWidth,
-			height:  highlightBoxHeight,
+			width: inst.highlightBoxWidth,
+			height:  inst.highlightBoxHeight,
 			fill: inst.color,
-			opacity: highlightBoxOpacity,
+			opacity: inst.highlightBoxOpacity,
 			lockRotation: true
 		  });
 		}

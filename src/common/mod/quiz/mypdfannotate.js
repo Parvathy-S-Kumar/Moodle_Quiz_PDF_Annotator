@@ -125,8 +125,8 @@
 		  toolObj = new fabric.Rect({
 			left: event.clientX - fabricObj.upperCanvasEl.getBoundingClientRect().left,
 			top: event.clientY - fabricObj.upperCanvasEl.getBoundingClientRect().top,
-			width: 100,
-			height: 100,
+			width: 400,
+			height: 50,
 			fill: inst.color,
 			opacity: 0.2,
 			lockRotation: true

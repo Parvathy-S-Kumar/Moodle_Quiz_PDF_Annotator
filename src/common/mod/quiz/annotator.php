@@ -213,4 +213,4 @@ if($canProceed == true)
     var filepath = "<?= $filepath ?>"; 
     var component = "<?= $component ?>"; 
 </script>
-<script type="text/javascript" src="./myscript.js"></script>
+<script type="text/javascript" src="./clickhandlers.js"></script>

@@ -43,7 +43,7 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
     * Usage example _sudo make quiz_annotator MOODLE_VERSION=4.0 MOODLE_DATA_DIR='/var/moodledata'_
     * The parameters MOODLE_VERSION and MOODLE_DATA_DIR are optional. 
     * MOODLE_DATA_DIR should be set to the path of moodledata directory.
-    * Default MOODLE_VERSION is 4.0 and MOODLE_DATA_DIR is '/var/moodledata'
+    * Default MOODLE_VERSION is 4.1 and MOODLE_DATA_DIR is '/var/moodledata'
     
 3. To clear the cache
     * `sudo php /var/www/html/moodle/admin/cli/purge_caches.php`

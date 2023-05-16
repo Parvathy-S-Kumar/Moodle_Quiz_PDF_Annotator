@@ -11,8 +11,8 @@ The steps for installation can be found [here](https://github.com/Parvathy-S-Kum
 
 | Developers         |  Email ID                   |
 |--------------------|-----------------------------|
-|   Asha Jose        | ashaj0308@gmail.com         |
-|   Parvathy S Kumar | parvathyskumar187@gmail.com |
+|   [Asha Jose](https://www.linkedin.com/in/asha-jose-5b8031218/)        | ashaj0308@gmail.com         |
+|   [Parvathy S Kumar](https://www.linkedin.com/in/parvathy-s-kumar-288aa01b2/) | parvathyskumar187@gmail.com |
 
 Special thanks to Mr. Sumesh K S (Technical Supdt.) for helping us in testing.
 

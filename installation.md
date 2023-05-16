@@ -17,7 +17,7 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
     ```
 
     * (optional) now to check imagemagick is working , convert a png file to a pdf ,in terminal run 
-        * ```convert file.png file.pdf```
+        * `convert file.png file.pdf`
         
 ### Steps to add Quiz Annotator to Moodle
 

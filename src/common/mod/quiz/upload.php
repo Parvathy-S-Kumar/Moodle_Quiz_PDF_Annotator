@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @author Tausif Iqbal, Vishal Rao
  * @updatedby Asha Jose, Parvathy S Kumar
@@ -11,7 +10,6 @@
  * Then save it temporarily in this directory.
  *
  * Then create new file in databse using this temporary file.
- *
  */
 
 require_once('../../config.php');
@@ -20,7 +18,16 @@ require __DIR__ . '/annotatedfilebuilder.php';
 require __DIR__ . '/parser.php';
 require __DIR__ . '/alphapdf.php';
 
-//To convert PDF versions to 1.4 if the version is above it since FPDI parser will only work for PDF versions upto 1.4
+/**
+ * To convert PDF versions to 1.4 if the version is above it
+ * since FPDI parser will only work for PDF versions upto 1.4.
+ * Given a file and its path, the file converted to version 1.4 is returned,
+ * if version is above it else, the original file is retured.
+ *
+ * @param string $file the pdf file
+ * @param string $path the path where the file exists
+ * @return $file the pdf file after conversion is done if necessary
+ */
 function convert_pdf_version($file, $path)
 {
     $filepdf = fopen($file,"r");
@@ -32,8 +39,8 @@ function convert_pdf_version($file, $path)
         $pdfversion = implode('.', $matches[0]);
         if($pdfversion > "1.4")
         {
-            $srcfile_new=$path."/newdummy.pdf";
-            $srcfile=$file;
+            $srcfile_new = $path."/newdummy.pdf";
+            $srcfile = $file;
             //Using GhostScript convert the pdf version to 1.4
             $shellOutput = shell_exec('gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE \
             -dBATCH -sOutputFile="'.$srcfile_new.'" "'.$srcfile.'"'); 
@@ -41,7 +48,7 @@ function convert_pdf_version($file, $path)
             {
                 throw new Exception("PDF conversion using GhostScript failed");
             }
-            $file=$srcfile_new;
+            $file = $srcfile_new;
             unlink($srcfile);          // to remove original dummy.pdf
         }   
         fclose($filepdf);
@@ -74,9 +81,9 @@ $fileinfo = array(
 $json = json_decode($value,true);
 
 //Referencing the file from the temp directory 
-$path= $CFG->tempdir . '/EssayPDF';
+$path = $CFG->tempdir . '/EssayPDF';
 $file = $path . '/dummy.pdf'; 
-$tempfile= $path . '/outputmoodle.pdf';
+$tempfile = $path . '/outputmoodle.pdf';
 
 if(file_exists($file))
 {
@@ -86,7 +93,7 @@ if(file_exists($file))
     //Using FPDF and FPDI to annotate
     if(file_exists($file))
     {
-        $pdf=build_annotated_file($file,$json);
+        $pdf = build_annotated_file($file, $json);
         // Deleting dummy.pdf
         unlink($file);
         // creating output moodle file for loading into database

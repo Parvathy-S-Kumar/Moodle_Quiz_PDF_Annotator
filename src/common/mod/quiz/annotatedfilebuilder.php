@@ -16,13 +16,19 @@ define("XOFFSET",1);
 define("YOFFSET",1);
 define("ADJUSTPAGESIZE",FALSE);
 
-/*Takes file to annotate and the annotation data passed from upload.php 
-and returns the annotated PDF File Object */
-function build_annotated_file($file,$json)
+/**
+ * Takes file to annotate and the annotation data passed from upload.php and
+ * returns the annotated PDF File Object
+ *
+ * @param string $file the name of the file to annotate
+ * @param object $json the annotation data
+ * @return $pdf the fpdi object that has information related to pdf file and annotations.
+ */
+function build_annotated_file($file, $json)
 {
     //Get the page orientation
-    $orientation=$json["page_setup"]['orientation'];
-    $orientation=($orientation=="portrait")? 'p' : 'l';
+    $orientation = $json["page_setup"]['orientation'];
+    $orientation = ($orientation=="portrait")? 'p' : 'l';
 
     //FPDI class defined in alphapdf.php
     $pdf = new AlphaPDF($orientation); 
@@ -35,14 +41,14 @@ function build_annotated_file($file,$json)
         $size = $pdf->getTemplateSize($template); 
         $pdf->addPage(); 
         $pdf->useTemplate($template, XOFFSET, YOFFSET, $size['width'], $size['height'], ADJUSTPAGESIZE); 
-        $currPage=$json["pages"][$i-1];
+        $currPage = $json["pages"][$i-1];
 
-        if(count((array)$currPage) ==0) //To check whether the current page has no annotations
+        if(count((array)$currPage) == 0) //To check whether the current page has no annotations
             continue;
         //Number of objects in the current page
-        $objnum=count((array)$currPage[0]["objects"]);
+        $objnum = count((array)$currPage[0]["objects"]);
 
-        for($j=0;$j<$objnum;$j++)
+        for($j = 0; $j < $objnum; $j++)
         {
             $arr = $currPage[0]["objects"][$j];
             if($arr["type"]=="path")
@@ -63,8 +69,14 @@ function build_annotated_file($file,$json)
     return $pdf;
 }
 
-
-// Function to draw free hand drawing
+/**
+ * Function to draw free hand drawing
+ * Given the array containing information related to path containg the FPDF line object and 
+ * FPDI file object, it adds the path as series of line object to FPDI file object
+ *
+ * @param array $arr the deserialized data array for the path in FPDF line format
+ * @param object $pdf the fpdi object that has information related to pdf file and annotations.
+ */
 function draw_path($arr, $pdf) 
 {
     $list = parser_path($arr);
@@ -79,7 +91,14 @@ function draw_path($arr, $pdf)
     } 
 }
 
-//Function to insert text
+/**
+ * Function to insert text
+ * Given the array containing information related to FPDF text object and FPDI file object,
+ * it adds the text object to FPDI file object
+ *
+ * @param array $arr the deserialized data array in FPDF text format
+ * @param object $pdf the fpdi object that has information related to pdf file and annotations.
+ */
 function insert_text($arr,$pdf)
 {
     $list = parser_text($arr);
@@ -93,18 +112,25 @@ function insert_text($arr,$pdf)
     $list[4]);                                                 // text content
 }
 
-//Function to draw a rectangle
+/**
+ * Function to draw a rectangle
+ * Given the array containing information related to FPDF Rect object and FPDI file object,
+ * it adds the Rect object to FPDI file object
+ *
+ * @param array $arr the deserialized data array in FPDF Rect format
+ * @param object $pdf the fpdi object that has information related to pdf file and annotations.
+ */
 function draw_rect($arr,$pdf)
 {
     $list = parser_rectangle($arr);
     $fill = process_color($list[4]);
-    $pdf->SetFillColor($fill[0],$fill[1],$fill[2]); // r g b
-    $pdf->SetAlpha(OPACITY);                     // for highlighting
+    $pdf->SetFillColor($fill[0],$fill[1],$fill[2]);              // r g b
+    $pdf->SetAlpha(OPACITY);                  // for highlighting
     $pdf->Rect($list[0],                      // x
     $list[1],                                 // y
     $list[2],                                 // width
     $list[3],'F');                            // height
     // F refers to syle fill
-    $pdf->SetAlpha(FULLOPACITY);
+    $pdf->SetAlpha(FULLOPACITY);              // setting the opacity back to 1.
 }
 ?>

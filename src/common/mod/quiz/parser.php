@@ -51,7 +51,6 @@ function parser_path($arrPath)
    return $list;
 }
 
-
 /**
  * Parser for text
  * Given an array containing the data related to FabricJS text object,
@@ -71,7 +70,6 @@ function parser_text($arrText)
     array_push($list,$arrText["fontSize"]);
     return $list;
 }
-
 
 /**
  * Parser for rectangle
@@ -95,7 +93,6 @@ function parser_rectangle($arrRect)
 
 }
 
-
 /**
  * Utility function for converting color format from fabricJS to rgb values
  * Given a string containing the color data in fabricJS format,
@@ -105,22 +102,22 @@ function parser_rectangle($arrRect)
  * @return array $rgb colors in [r,g,b] format
  */
 function process_color($colorString) {
-    if ($colorString== "null")    
+    if ($colorString == "null")    
         $rgb = [0, 0, 0];
-    if ($colorString== "red" || $colorString== "rgba(251, 17, 17, 0.3)" || $colorString== "rgb(251, 17, 17)")                 
+    if ($colorString == "red" || $colorString == "rgba(251, 17, 17, 0.3)" || $colorString == "rgb(251, 17, 17)")                 
         $rgb = [251, 17, 17];              // converting string to rgb
-    else if ($colorString== "green" || $colorString== "rgba(13, 93, 13, 0.3)" || $colorString== "rgb(13, 93, 13)")
+    else if ($colorString == "green" || $colorString == "rgba(13, 93, 13, 0.3)" || $colorString == "rgb(13, 93, 13)")
         $rgb = [13, 93, 13];
-    else if($colorString== "blue" || $colorString== "rgba(2, 2, 182, 0.3)" || $colorString== "rgb(2, 2, 182)")
+    else if($colorString == "blue" || $colorString == "rgba(2, 2, 182, 0.3)" || $colorString == "rgb(2, 2, 182)")
         $rgb = [2, 2, 182];
-    else if($colorString== "black" || $colorString== "rgba(0, 0, 0, 0.3)" || $colorString== "rgb(0, 0, 0)")
+    else if($colorString == "black" || $colorString == "rgba(0, 0, 0, 0.3)" || $colorString == "rgb(0, 0, 0)")
         $rgb = [0, 0, 0];
-        else if($colorString== "yellow" || $colorString== "rgba(255, 255, 0, 0.3)" || $colorString== "rgb(255, 255, 0)")
+        else if($colorString == "yellow" || $colorString == "rgba(255, 255, 0, 0.3)" || $colorString == "rgb(255, 255, 0)")
         $rgb = [255, 255, 0];
     else {
-        $rgb =array();
-        list($r, $g, $b) = sscanf($str, "#%02x%02x%02x"); //hexadecimal format
-        $rgb=[$r, $g, $b];
+        $rgb = array();
+        list($r, $g, $b) = sscanf($colorString, "#%02x%02x%02x"); //hexadecimal format
+        $rgb = [$r, $g, $b];
     }
     return $rgb;
 }

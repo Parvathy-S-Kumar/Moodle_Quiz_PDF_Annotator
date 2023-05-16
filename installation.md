@@ -40,7 +40,7 @@ Follow this [link](https://docs.bitnami.com/google/apps/resourcespace/configurat
 2. To switch to Moodle_Quiz_PDF_Annotator directory and copy the required files by executing the following commands.
     * `cd Moodle_Quiz_PDF_Annotator/`
     * `sudo make quiz_annotator MOODLE_VERSION=x.x MOODLE_DATA_DIR=y` 
-    * Usage example _sudo make quiz_annotator MOODLE_VERSION=4.0 MOODLE_DATA_DIR='/var/moodledata'_
+    * Usage example _sudo make quiz_annotator MOODLE_VERSION=4.1 MOODLE_DATA_DIR='/var/moodledata'_
     * The parameters MOODLE_VERSION and MOODLE_DATA_DIR are optional. 
     * MOODLE_DATA_DIR should be set to the path of moodledata directory.
     * Default MOODLE_VERSION is 4.1 and MOODLE_DATA_DIR is '/var/moodledata'
@@ -55,7 +55,7 @@ __Note you might need to change the variable MOODLE in Makefile according to you
 1. Go to the moodle_quiz_qnnotator folder ,open terminal and run 
     * `sudo make restore`
 
-__Note you always need to restore by the above command before making again. Repeated running of `sudo make quiz_annotator` will copy the wrong files to the backup directory and would make the next restoring process fail. .__   
+__Note you always need to restore by the above command before making again. Repeated running of 'sudo make quiz_annotator' will copy the wrong files to the backup directory and would make the next restoring process fail. .__   
     
 ### Support for other versions
 - Add in [/mod/quiz/](https://github.com/Parvathy-S-Kumar/Moodle_Quiz_PDF_Annotator/tree/main/src/common/mod/quiz)

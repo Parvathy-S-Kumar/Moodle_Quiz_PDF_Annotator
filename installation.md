@@ -54,22 +54,24 @@ __Note you might need to change the variable MOODLE in Makefile according to you
 ### Steps to remove Quiz Annotator from  Moodle
 1. Go to the moodle_quiz_qnnotator folder ,open terminal and run 
     * `sudo make restore`
+
+__Note you always need to restore by the above command before making again. Repeated running of `sudo make quiz_annotator` will copy the wrong files to the backup directory and would make the next restoring process fail. .__   
     
 ### Support for other versions
-- Add in [/mod/quiz/](https://github.com/Parvathy-S-Kumar/Moodle_Quiz_PDF_Annotator/tree/main/4.0/mod/quiz)
+- Add in [/mod/quiz/](https://github.com/Parvathy-S-Kumar/Moodle_Quiz_PDF_Annotator/tree/main/src/common/mod/quiz)
 	1. parser.php
-	2. test.php
+	2. annotatedfilebuilder.php
 	3. alphapdf.php
-	4. myindex.html
-	5. mypdfannotate.js
+	4. index.html
+	5. pdfannotate.js
 	6. annotator.php
 	7. upload.php
-	8. mypdfannotate.css
-	9. myscript.js
-	10. mystyles.css
+	8. pdfannotate.css
+	9. clickhandlers.js
+	10. styles.css
 	
-- Add in /mod/quiz/ the directory [fpdf-fpdi](https://github.com/Parvathy-S-Kumar/Moodle_Quiz_PDF_Annotator/tree/main/4.0/mod/quiz/fpdi-fpdf)
+- Add in /mod/quiz/ the directory [fpdf-fpdi](https://github.com/Parvathy-S-Kumar/Moodle_Quiz_PDF_Annotator/tree/main/src/common/mod/quiz/fpdi-fpdf)
 
-- User can go through the [changelog](https://github.com/Parvathy-S-Kumar/Moodle_Quiz_PDF_Annotator/blob/main/4.0/changelog.md) and modify the following files.
+- User can go through the [changelog](https://github.com/Parvathy-S-Kumar/Moodle_Quiz_PDF_Annotator/blob/main/src/4.1/changelog.md) and modify the following files.
    1. /mod/quiz/comment.php
    2. /question/type/essay/renderer.php

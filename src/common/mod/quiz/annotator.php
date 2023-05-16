@@ -18,7 +18,7 @@
  * This page allows the teacher to annotate file of a particular question.
  *
  * @author Tausif Iqbal and Vishal Rao
- * @updatedby Asha Jose and Parvathy S Kumar
+ * @updatedby Asha Jose and Parvathy S Kumar (on lines 118 - 200)
  * @package   mod_quiz
  * @copyright gustav delius 2006
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

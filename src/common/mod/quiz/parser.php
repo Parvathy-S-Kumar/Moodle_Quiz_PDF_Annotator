@@ -104,7 +104,7 @@ function parser_rectangle($arrRect)
  * @param string $colorString the string containing color data
  * @return array $rgb colors in [r,g,b] format
  */
-function process_color($str) {
+function process_color($colorString) {
     if ($colorString== "null")    
         $rgb = [0, 0, 0];
     if ($colorString== "red" || $colorString== "rgba(251, 17, 17, 0.3)" || $colorString== "rgb(251, 17, 17)")                 

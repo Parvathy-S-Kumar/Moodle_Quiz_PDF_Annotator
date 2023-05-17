@@ -23,6 +23,8 @@ else ifeq ($(MOODLE_VERSION),4.1)
 	@echo "installing version 4.1 .. "
 else ifeq ($(MOODLE_VERSION),4.2)
 	@echo "installing version 4.2 .. "
+else ifeq ($(MOODLE_VERSION),3.9)
+	@echo "installing version 3.9 .. "
 else ifeq ($(MOODLE_VERSION),3.11)
 	@echo "installing version 3.11 ..."
 	$(eval TEMP_VERSION=4.0)

@@ -141,7 +141,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     }
     catch(Exception $e)
     {
-        echo 'Message: ' .$e->getMessage();
+        throw new Exception("Unsupported File Type");
     }
 
     if($canProceed == true)

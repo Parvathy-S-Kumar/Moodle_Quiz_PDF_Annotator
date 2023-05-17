@@ -21,6 +21,8 @@
  * @package   mod_quiz
  * @copyright gustav delius 2006
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Changes made by Vishal Rao and Tausif Iqbal from line 113-161
+ * No changes made by Asha Jose and Parvathy S Kumar
  */
 
 require_once('../../config.php');
@@ -107,7 +109,6 @@ if (data_submitted() && confirm_sesskey()) {
 
 // Print quiz information.
 echo $output->review_summary_table($summarydata, 0);
-
 
 //Tausif Iqbal, Vishal Rao work starts here
 // Print the comment form.

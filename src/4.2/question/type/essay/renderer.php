@@ -21,6 +21,9 @@
  * @subpackage essay
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Changes were made by Tausif Iqbal and Vishal Rao on line numbers
+ * 81-82, 90-91, 109-115, 123-193
+ * No changes made by Asha Jose and Parvathy S Kumar
  */
 
 

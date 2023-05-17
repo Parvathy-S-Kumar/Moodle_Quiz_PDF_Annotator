@@ -105,29 +105,53 @@ if(file_exists($file))
 else
     throw new Exception('\nSource PDF not found!'); 
 
-//Untouched 
-$fs = get_file_storage();
-// Prepare file record object
-$fileinfo = array(
-    'contextid' => $contextid,
-    'component' => $component,
-    'filearea' => $filearea,
-    'itemid' => $itemid,
-    'filepath' => $filepath,
-    'filename' => $filename);
-
-//check if file already exists, then first delete it.
-$doesExists = $fs->file_exists($contextid, $component, $filearea, $itemid, $filepath, $filename);
-if($doesExists === true)
+if(file_exists($tempfile))
 {
-    $storedfile = $fs->get_file($contextid, $component, $filearea, $itemid, $filepath, $filename);
-    $storedfile->delete();
-}
-// finally save the file (creating a new file)
-$fs->create_file_from_pathname($fileinfo, $tempfile);
-//Untouched portion ends
+    //Lines 111 - 149 are pulled from Tausif Iqbal and Vishal Rao version 3.6
+    $fsize = filesize($tempfile); //File size of annotated file
+    $max_upload = (int)(ini_get('upload_max_filesize'));
+    $max_post = (int)(ini_get('post_max_size'));
+    $memory_limit = (int)(ini_get('memory_limit'));
+    $max_mb = min($max_upload, $max_post, $memory_limit); // in mb
+    $maxbytes = $max_mb*1024*1024; // in bytes
 
-// Deleting outputmoodle.pdf
-unlink($tempfile);  
+    $mdl_maxbytes = $CFG->maxbytes;
+    if($mdl_maxbytes > 0)
+    {
+        $maxbytes = min($maxbytes, $mdl_maxbytes);
+    }
+    if(($fsize > 0) && ($maxbytes > 0) && ($fsize < $maxbytes))
+    {
+        $fs = get_file_storage();
+        // Prepare file record object
+        $fileinfo = array(
+            'contextid' => $contextid,
+            'component' => $component,
+            'filearea' => $filearea,
+            'itemid' => $itemid,
+            'filepath' => $filepath,
+            'filename' => $filename);
+
+        //check if file already exists, then first delete it.
+        $doesExists = $fs->file_exists($contextid, $component, $filearea, $itemid, $filepath, $filename);
+        if($doesExists === true)
+        {
+            $storedfile = $fs->get_file($contextid, $component, $filearea, $itemid, $filepath, $filename);
+            $storedfile->delete();
+        }
+        // finally save the file (creating a new file)
+        $fs->create_file_from_pathname($fileinfo, $tempfile);           
+    }
+    else
+    {
+        throw new Exception("Too big file");
+    }
+    // Deleting outputmoodle.pdf
+    unlink($tempfile);
+}
+else
+{
+    throw new Exception("Failed to create output file");
+}
 ?>
 

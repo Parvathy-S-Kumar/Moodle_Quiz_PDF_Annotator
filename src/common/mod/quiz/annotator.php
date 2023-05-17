@@ -121,7 +121,7 @@ if($doesExists === true)   // if exists then update $fileurl to the url of this 
     $originalFile->copy_content_to($fileToConvert);
     
     // get the mime-type of the original file
-    $mime = mime_content_type($originalFile->get_filename());
+    $mime = mime_content_type($fileToConvert);
     $mime = (explode("/", $mime))[0];
 
     // convert that file into PDF, based on mime type (NOTE: this will be created in the cwd)
